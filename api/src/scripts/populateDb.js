@@ -13,9 +13,20 @@ const populateDBWithPokeAPI = async () => {
                 const newPokemon = {
                     name: pokemonData.name,
                     img: pokemonData.sprites,
-                    hp: pokemonData.hp,
-                }
+                    hp: pokemonData.stats[0].base_stat,
+                    atk: pokemonData.stats[1].base_stat,
+                    def: pokemonData.stats[2].base_stat,
+                    spd: pokemonData.stats[5].base_stat,
+                    heigth: pokemonData.heigth,
+                    weight: pokemonData.weight,
+                };
+                await Pokemon.create(newPokemon);
             })
-        )
+        );
+        console.log('Database populated with PokeAPI data.');
+    } catch (error) {
+        console.error('Error populating database:', error);
     }
-}
+};
+
+populateDBWithPokeAPI();
