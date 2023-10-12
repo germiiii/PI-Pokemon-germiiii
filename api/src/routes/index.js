@@ -1,8 +1,9 @@
 const express = require('express');
 const { Router } = require('express');
-const { getAllPokemons } = require('../controllers/getAllPokemons');
-const { getPokemonDetails } = require('../controllers/getPokemonDetails');
-const router = Router();
+const getPokemon = require('../controllers/getPokemon');
+
+
+const mainRouter = Router();
 
 // Import other routers if needed
 // Example: const authRouter = require('./auth.js');
@@ -11,7 +12,7 @@ const router = Router();
 // Example: router.use('/auth', authRouter);
 
 // Define the routes and call the controllers
-router.get('/pokemons', getAllPokemons);
-router.get('/pokemons/:idPokemon', getPokemonDetails);
+mainRouter.get('/', getPokemon);
+mainRouter.get('/:id', getPokemon);
 
-module.exports = router;
+module.exports = mainRouter;
