@@ -1,10 +1,19 @@
 const { createPokemon, getPokemonById, getAllPokemons , searchPokemonByName } = require('../controllers/getPokemon')
 
-const getPokemonsHandler = async (req,res) => {
-    const { name } = req.query;
-    const results = name ? await searchPokemonByName(name) : await getAllPokemons();
-    res.status(200).json(results);
-};
+const getPokemonsHandler = async (req, res) => {
+    try {
+      const { name: string } = req.query;
+      if (string) {
+        const results = await searchPokemonByName(string);
+        res.status(200).json(results);
+      } else {
+        res.status(200).json(await getAllPokemons());
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
 
 const getPokemonHandler = async (req,res) => {
     const { id } = req.params;
