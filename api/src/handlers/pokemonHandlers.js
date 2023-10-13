@@ -1,17 +1,16 @@
-const { createPokemon, getPokemonById, getAllPokemons , searchPokemonByName } = require('../controllers/getPokemon')
+const { createPokemon, getPokemonById, getAllPokemons , searchPokemonByNames } = require('../controllers/getPokemon')
 
 const getPokemonsHandler = async (req, res) => {
     try {
-      const { name: string } = req.query;
-      if (string) {
-        const results = await searchPokemonByName(string);
+      const { name } = req.params;
+      const results = name ? await searchPokemonByNames(name, req.query.language) : await getAllPokemons();
+      if (results) {
         res.status(200).json(results);
       } else {
-        res.status(200).json(await getAllPokemons());
+        res.status(404).json({ message: 'No matching Pokémon found' });
       }
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: error.message });
     }
   };
 

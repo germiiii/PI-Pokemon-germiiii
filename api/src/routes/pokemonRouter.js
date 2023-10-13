@@ -4,9 +4,9 @@ const { getPokemonHandler, getPokemonsHandler, createPokemonHandler } = require(
 const pokemonRouter = express.Router();
 
 pokemonRouter.get('/names', getPokemonsHandler);
-pokemonRouter.get('/name', getPokemonsHandler);
+pokemonRouter.get('/name/:name', getPokemonsHandler);
 pokemonRouter.get('/', getPokemonsHandler);
-pokemonRouter.get('/:id', getPokemonHandler);
+pokemonRouter.get('/id/:id', getPokemonHandler);
 pokemonRouter.post('/', createPokemonHandler);
 
 module.exports = pokemonRouter;

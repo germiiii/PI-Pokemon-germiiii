@@ -15,7 +15,7 @@ const loggerMiddleware = (req, res, next) => {
 mainRouter.use(loggerMiddleware);
 
 // Define the routes and call the controllers
-mainRouter.use('/pokemons', pokemonRouter);
+mainRouter.use('/pokemon', pokemonRouter);
 mainRouter.use('/type', typeRouter);
 
 module.exports = mainRouter;
