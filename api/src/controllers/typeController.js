@@ -3,19 +3,18 @@ const { Type }= require('../db');
 const axios = require('axios');
 
 const cleanType = (arr) => {
-    arr.map(elem => {
-        return{
-            name:elem.name,
-        }
-    })
-}
+    return arr.map(elem => {
+      return {
+        name: elem.name
+      };
+    });
+  };
 
-const getType = async (req,res) => {
+const getType = async (req, res) => {
     const DBTypesRAW = await Type.findAll();
-    const DBTypes = cleanType(DBTypesRAW);
     const apiTypesRaw = (await axios.get(`https://pokeapi.co/api/v2/type`)).data;
-    const apiTypes = cleanType(apiTypesRaw);
-    return [...DBTypes , ...apiTypes]
-}
-
+    const apiTypesArray = Object.values(apiTypesRaw.results);
+     const apiT = cleanType(apiTypesArray)
+    return [...DBTypesRAW, ...apiT];
+  };
 module.exports = {getType}
