@@ -39,21 +39,23 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
   await Pokemon.create({ name, image, hp, attack, defense, speed, height, weight });
 };
 
-const searchPokemonByName = async (name) => {
-  console.log(name)
-  try {
-    const databasePokemons = await Pokemon.findAll({ attributes: ['name'], where: { name: name } });
-    const apiPokemonsRAW = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)).data;
-    const apiPokemons = cleanArray([apiPokemonsRAW]);
-    //const filteredApi = apiPokemons.filter((pokemon) => pokemon.name === name)
-    return [...databasePokemons, ...apiPokemons];
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to search for Pokémon');
-  }
-};
+// const searchPokemonByName = async (name) => {
+//   console.log(name)
+//   try {
+//     const databasePokemons = await Pokemon.findAll({ attributes: ['name'], where: { name: name } });
+//     const apiPokemonsRAW = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)).data;
+//     const apiPokemons = cleanArray([apiPokemonsRAW]);
+//     //const filteredApi = apiPokemons.filter((pokemon) => pokemon.name === name)
+//     return [...databasePokemons, ...apiPokemons];
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error('Failed to search for Pokémon');
+//   }
+// };
 
-const searchPokemonByNames = async (name, language = 'en') => {
+const searchPokemonByNames = async (req, res) => {
+  const { name } = req.query;
+  const { language = 'en' } = req.query;
   console.log(name);
   try {
     const lowerCaseName = name.toLowerCase();
@@ -79,10 +81,10 @@ const searchPokemonByNames = async (name, language = 'en') => {
     const allMatches = [...databasePokemons, ...translatedApiPokemons];
     const exactMatches = allMatches.filter((pokemon) => pokemon.name.toLowerCase() === lowerCaseName);
 
-    return exactMatches.length > 0 ? exactMatches : allMatches.length > 0 ? allMatches : null;
+    res.status(200).json(exactMatches.length > 0 ? exactMatches : allMatches.length > 0 ? allMatches : null);
   } catch (error) {
     console.error(error);
-    throw new Error('Failed to search for Pokémon');
+    res.status(400).json({ error: 'Failed to search for Pokémon' });
   }
 };
 
@@ -90,6 +92,5 @@ module.exports = {
   getAllPokemons,
   getPokemonById,
   createPokemon,
-  searchPokemonByName,
   searchPokemonByNames,
 };

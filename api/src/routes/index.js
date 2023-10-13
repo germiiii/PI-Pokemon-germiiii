@@ -1,18 +1,17 @@
 const express = require('express');
 const pokemonRouter = require('./pokemonRouter')
 const typeRouter = require('./typeRouter')
+const app = express();
 
 const mainRouter = express.Router();
 
 // Import other routers if needed
 // Example: const authRouter = require('./auth.js');
-const loggerMiddleware = (req, res, next) => {
-    console.log('Request received');
-    next();
-  };
+
 // Configure the routers
 // Example: router.use('/auth', authRouter);
-mainRouter.use(loggerMiddleware);
+mainRouter.use(express.json());
+mainRouter.use(express.urlencoded({extended: true}));
 
 // Define the routes and call the controllers
 mainRouter.use('/pokemon', pokemonRouter);
