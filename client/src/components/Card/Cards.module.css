@@ -1,0 +1,57 @@
+.card {
+    width: 200px;
+    height: fit-content;
+    margin: fit-content;
+    padding: 10px;
+    border: 1px solid #000;
+    background-color: #FFF;
+    box-shadow: 0px 0px 5px #000;
+  }
+  
+  .card .text {
+    margin: 0;
+    padding: 0;
+  }
+  .card p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  
+  .card .name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .card .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .card .hp {
+    color: #F00;
+  }
+  
+  .card .attack {
+    color: #F80;
+  }
+  
+  .card .defense {
+    color: #FD0;
+  }
+  
+  .card .speed {
+    color: #00F;
+  }
+  
+  .card .height {
+    color: #0F0;
+  }
+  
+  .card .weight {
+    color: #00F;
+  }
+  
+  .card .type {
+    color: #F0F;
+  }
