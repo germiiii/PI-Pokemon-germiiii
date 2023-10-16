@@ -7,4 +7,8 @@
     height: 100%;
     background-color: #F9DF23;
     font-family: "Roboto", sans-serif;
+    flex-wrap: wrap;
+  }
+  .cardsContainer .card {
+    flex-basis: 33%;
   }

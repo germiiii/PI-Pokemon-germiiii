@@ -1,0 +1,86 @@
+.card {
+    background-color: #fae900;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .imageContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .pokemonName {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .p {
+    margin: 10px 0;
+  }
+  
+  .stats {
+    margin-top: 20px;
+  }
+  
+  .stat {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .statName {
+    margin-right: 10px;
+  }
+  
+  .progress-bar {
+    width: 200px;
+    height: 10px;
+    background-color: #ddd;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: blue;
+  }
+  
+  .height,
+  .weight,
+  .type {
+    margin: 10px 0;
+  }
+  
+  .typeColor {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  /* Type colors */
+  .typeColor.yellow {
+    background-color: yellow;
+  }
+  
+  .typeColor.red {
+    background-color: red;
+  }
+  
+  .typeColor.blue {
+    background-color: blue;
+  }
+  
+  .typeColor.gray {
+    background-color: gray;
+  }

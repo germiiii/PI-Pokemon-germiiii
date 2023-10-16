@@ -1,57 +1,67 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .card {
-    width: 200px;
-    height: fit-content;
-    margin: fit-content;
-    padding: 10px;
-    border: 1px solid #000;
-    background-color: #FFF;
-    box-shadow: 0px 0px 5px #000;
-  }
-  
-  .card .text {
-    margin: 0;
-    padding: 0;
-  }
-  .card p {
-    font-size: 12px;
-    line-height: 16px;
-  }
-  
-  .card .name {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .card .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .card .hp {
-    color: #F00;
-  }
-  
-  .card .attack {
-    color: #F80;
-  }
-  
-  .card .defense {
-    color: #FD0;
-  }
-  
-  .card .speed {
-    color: #00F;
-  }
-  
-  .card .height {
-    color: #0F0;
-  }
-  
-  .card .weight {
-    color: #00F;
-  }
-  
-  .card .type {
-    color: #F0F;
-  }
+  width: calc(33% - 20px);
+  height: fit-content;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  background-color: #FFF;
+  box-shadow: 0px 0px 5px #000;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 10px #000;
+}
+
+.progress-bar {
+  position: relative;
+  border-radius: 50px;
+  height: 15px;
+  width: 100%;
+}
+
+.progress-bar::after {
+  content: attr(data-label);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+}
+
+.card .text {
+ margin:0;
+ padding:0;
+}
+
+.card p {
+ font-size:12px;
+ line-height:16px;
+}
+
+.card .name {
+ font-size:16px;
+ font-weight:bold;
+}
+
+.card .image {
+ width:100%;
+ height:auto;
+}
+
+.card .height {
+ color:#494949;
+}
+
+.card .weight {
+ color:#414142;
+}
+
+.card .type {
+ color:#F0F;
+}
