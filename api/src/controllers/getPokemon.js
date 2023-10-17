@@ -4,28 +4,41 @@ const { Op } = require('sequelize');
 
 const { Pokemon } = require('../db');
 
+
 const cleanArray = (arr) => {
   return arr.map((elem) => {
     return {
       id: elem.id,
       name: elem.name,
-      image: elem.image,
-      hp: elem.hp,
-      attack: elem.attack,
-      defense: elem.defense,
-      speed: elem.speed,
-      heigth: elem.heigth, 
+      image: elem.sprites.front_default,
+      hp: elem.stats[0].base_stat,
+      attack: elem.stats[1].base_stat,
+      defense: elem.stats[2].base_stat,
+      speed: elem.stats[5].base_stat,
+      height: elem.height, 
       weight: elem.weight,
     };
   });
 };
 
 const getAllPokemons = async () => {
-    const databasePokemons = await Pokemon.findAll();
-    const apiPokemonsRAW = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=12')).data;
-    const apiPokemons = cleanArray(apiPokemonsRAW.results);
-    return [...databasePokemons, ...apiPokemons]
-}
+  const databasePokemons = await Pokemon.findAll();
+  const apiResponse = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=12');
+  const apiPokemonsRAW = apiResponse.data.results;
+
+  // Separamos la request a la API para cada pokemon para obtener las stats
+  const apiPokemonsPromises = apiPokemonsRAW.map(pokemon => axios.get(pokemon.url));
+  const apiPokemonsResponses = await Promise.all(apiPokemonsPromises);
+
+  // Extraemos la data de la response
+  const apiPokemonsData = apiPokemonsResponses.map(response => response.data);
+
+  // Limpiamos la data 
+  const apiPokemons = cleanArray(apiPokemonsData);
+
+  return [...databasePokemons, ...apiPokemons];
+};
+
 
 const getPokemonById = async (id, source) => {
   const pokemon = source === 'api'
@@ -39,19 +52,6 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
   await Pokemon.create({ name, image, hp, attack, defense, speed, height, weight });
 };
 
-// const searchPokemonByName = async (name) => {
-//   console.log(name)
-//   try {
-//     const databasePokemons = await Pokemon.findAll({ attributes: ['name'], where: { name: name } });
-//     const apiPokemonsRAW = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)).data;
-//     const apiPokemons = cleanArray([apiPokemonsRAW]);
-//     //const filteredApi = apiPokemons.filter((pokemon) => pokemon.name === name)
-//     return [...databasePokemons, ...apiPokemons];
-//   } catch (error) {
-//     console.error(error);
-//     throw new Error('Failed to search for Pokémon');
-//   }
-// };
 
 const searchPokemonByNames = async (req, res) => {
   const { name } = req.query;

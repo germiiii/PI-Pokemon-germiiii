@@ -8,23 +8,25 @@ const Form = () => {
   const [form, setForm] = useState({
     name: "",
     hp: '',
-    atk: '',
-    def: '',
-    spd: '',
+    attack: '',
+    defense: '',
+    speed: '',
     height: '',
     type: "",
     weight: '',
+    image: "",
   });
 
   const [errors, setErrors] = useState({
     name: "",
     hp: '',
-    atk: '',
-    def: '',
-    spd: '',
+    attack: '',
+    defense: '',
+    speed: '',
     height: '',
     type: "",
     weight: '',
+    image: "",
   });
 
   const changeHandler = (event) => {
@@ -41,12 +43,12 @@ const Form = () => {
   const validate = (property, value) => {
     if (property === 'hp' && !/^\d+$/.test(value)) {
       setErrors({ ...errors, hp: 'HP must be an integer' });
-    } else if (property === 'atk' && !/^\d+$/.test(value)) {
-      setErrors({ ...errors, atk: 'ATK must be an integer' });
-    } else if (property === 'def' && !/^\d+$/.test(value)) {
-      setErrors({ ...errors, def: 'DEF must be an integer' });
-    } else if (property === 'spd' && !/^\d+$/.test(value)) {
-      setErrors({ ...errors, spd: 'SPD must be an integer' });
+    } else if (property === 'attack' && !/^\d+$/.test(value)) {
+      setErrors({ ...errors, attack: 'ATK must be an integer' });
+    } else if (property === 'defense' && !/^\d+$/.test(value)) {
+      setErrors({ ...errors, defense: 'DEF must be an integer' });
+    } else if (property === 'speed' && !/^\d+$/.test(value)) {
+      setErrors({ ...errors, speed: 'SPD must be an integer' });
     } else if (property === 'height' && !/^\d+$/.test(value)) {
       setErrors({ ...errors, height: 'Height must be an integer' });
     } else if (property === 'weight' && !/^\d+$/.test(value)) {
@@ -59,25 +61,50 @@ const Form = () => {
       setErrors({ ...errors, type: 'El type debe ser solo letras' });
     } else if (property === 'type' && value === '') {
       setErrors({ ...errors, type: 'Este campo es obligatorio' });
+    }  else if (property === "image" && !isValidImageUrl(value)) {
+        setErrors({ ...errors, image: "Invalid image URL" });
     } else {
       // Clear the error message for the current field
       setErrors({ ...errors, [property]: '' });
     }
   }
 
+  const isValidImageUrl = (url) => {
+    // Simple URL format validation, you can customize this as needed
+    const urlPattern = /^https?:\/\/.+/i;
+    return urlPattern.test(url);
+  };
+  
   const submitHandler = async (event) => {
     event.preventDefault();
-  
+
+    console.log('Form object', form);
     try {
-      const response = await axios.post('http://localhost:3001/pokemon/', form, {
+      const response = await axios.post('http://localhost:3001/pokemon', form, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      
-      alert('Success: ' + JSON.stringify(response.data));
+  
+      if (response.status === 201) {
+        // The request was successful (status code 201 - Created).
+        alert('Success: Pokémon created successfully.');
+      } else {
+        // Handle unexpected responses.
+        alert('Error: Unexpected response from the server.');
+      }
     } catch (error) {
-      alert('Error: ' + error.message);
+      // Handle errors, including network errors, server errors, and validation errors.
+      if (error.response) {
+        // The request was made and the server responded with a status code outside the range of 2xx.
+        alert('Error: ' + error.response.data.message); // Use the specific error message from the server.
+      } else if (error.request) {
+        // The request was made but no response was received, or an error occurred when setting up the request.
+        alert('Error: No response from the server. Check your network connection.');
+      } else {
+        // Something happened in setting up the request that triggered an error.
+        alert('Error: ' + error.message);
+      }
     }
   };
 
@@ -95,18 +122,18 @@ const Form = () => {
       </div>
       <div>
         <label>ATK</label>
-        <input type="number" min="1" step="1" value={form.atk} onChange={changeHandler} name="atk" />
-        {errors.atk && <span>{errors.atk}</span>}
+        <input type="number" min="1" step="1" value={form.attack} onChange={changeHandler} name="attack" />
+        {errors.attack && <span>{errors.attack}</span>}
       </div>
       <div>
         <label>DEF</label>
-        <input type="number" min="1" step="1" value={form.def} onChange={changeHandler} name="def" />
-        {errors.def && <span>{errors.def}</span>}
+        <input type="number" min="1" step="1" value={form.defense} onChange={changeHandler} name="defense" />
+        {errors.defense && <span>{errors.defense}</span>}
       </div>
       <div>
         <label>SPD</label>
-        <input type="number" min="1" step="1" value={form.spd} onChange={changeHandler} name="spd" />
-        {errors.spd && <span>{errors.spd}</span>}
+        <input type="number" min="1" step="1" value={form.speed} onChange={changeHandler} name="speed" />
+        {errors.speed && <span>{errors.speed}</span>}
       </div>
       <div>
         <label>Height</label>
@@ -146,7 +173,12 @@ const Form = () => {
            <option value="Shadow">Shadow</option>
          </select>
          {errors.type && <span>{errors.type}</span>}
-</div>
+        </div>
+        <div>
+          <label>Image URL</label>
+          <input type="text" value={form.image} onChange={changeHandler} name="image" />
+          {errors.image && <span>{errors.image}</span>}
+        </div>
       <SubmitButton onSubmit={submitHandler}/>
     </form>
   );

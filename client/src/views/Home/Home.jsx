@@ -2,6 +2,7 @@ import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getPokemons } from '../../redux/actions'
+import Pagination from "../../components/Pagination/Pagination";
 
 
 const Home = () => {

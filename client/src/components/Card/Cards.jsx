@@ -5,8 +5,7 @@ import PokemonType from '../../components/Type/Type';
 import { Link } from 'react-router-dom';
 
 const Cards = (props) => {
-    // Ensure that props.type is an array, and if not, provide a default empty array.
-    const typeArray = Array.isArray(props.type) ? props.type : [];
+
 
     return (
         <div className={style.card}>

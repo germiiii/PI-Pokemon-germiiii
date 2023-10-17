@@ -28,3 +28,39 @@
     color: red; /* Set the text color to red */
     font-size: 12px; /* Set the font size to a smaller value */
   }
+  .form select {
+    margin: 10px 0;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-position: 95% center; /* Adjust the position of the icon */
+    appearance: none; /* Remove default arrow in some browsers */
+    cursor: pointer; /* Show a pointer cursor on hover */
+  }
+  
+  .form select:focus {
+    outline: none; /* Remove the default focus outline */
+    border: 1px solid #F9DF23; /* Change border color on focus */
+    box-shadow: 0px 0px 5px #F9DF23; /* Add a shadow on focus */
+  }
+  
+  /* Style the dropdown arrow */
+  .form select::after {
+    content: '▼'; /* Add a custom arrow */
+    font-size: 14px; /* Adjust arrow size */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #000; /* Arrow color */
+  }
+  
+  /* Style the dropdown options */
+  .form select option {
+    background-color: #F9DF23;
+    color: #000;
+    font-weight: bold;
+  }
