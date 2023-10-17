@@ -71,6 +71,7 @@ const CardsContainer = ()=>{
         <div className={style.cardsContainer}>
             {pokemons.map(pokemon =>{
                 return <Cards 
+                key={pokemon.id}
                 id={pokemon.id}
                 name={pokemon.name}
                 image={pokemon.image}

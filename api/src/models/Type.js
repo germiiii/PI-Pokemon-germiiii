@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         allowNull: false, 
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM("Normal", "Figthting", 'Flying', 'Poison' , 'Ground' , 'Rock' , 'Bug', 'Ghost', 'Steel', 'Fire' , 'Water', 'Grass', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark' , 'Fairy', 'Unknown', 'Shadow'),
         allowNull: false,
       },
     },

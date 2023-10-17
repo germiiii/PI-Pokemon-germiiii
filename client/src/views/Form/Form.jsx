@@ -119,10 +119,34 @@ const Form = () => {
         {errors.weight && <span>{errors.weight}</span>}
       </div>
       <div>
-        <label>Type</label>
-        <input type="text" value={form.type} onChange={changeHandler} name="type" />
-        {errors.type && <span>{errors.type}</span>}
+      <label>Type</label>
       </div>
+      <div>
+         <select value={form.type} onChange={changeHandler} name="type">
+           <option value="">Select a type</option>
+           <option value="Normal">Normal</option>
+           <option value="Fighting">Fighting</option>
+           <option value="Flying">Flying</option>
+           <option value="Poison">Poison</option>
+           <option value="Ground">Ground</option>
+           <option value="Rock">Rock</option>
+           <option value="Bug">Bug</option>
+           <option value="Ghost">Ghost</option>
+           <option value="Steel">Steel</option>
+           <option value="Fire">Fire</option>
+           <option value="Water">Water</option>
+           <option value="Grass">Grass</option>
+           <option value="Electric">Electric</option>
+           <option value="Psychic">Psychic</option>
+           <option value="Ice">Ice</option>
+           <option value="Dragon">Dragon</option>
+           <option value="Dark">Dark</option>
+           <option value="Fairy">Fairy</option>
+           <option value="Unknown">Unknown</option>
+           <option value="Shadow">Shadow</option>
+         </select>
+         {errors.type && <span>{errors.type}</span>}
+</div>
       <SubmitButton onSubmit={submitHandler}/>
     </form>
   );
