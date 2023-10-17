@@ -25,4 +25,6 @@
 
   .form span {
     display: block;
+    color: red; /* Set the text color to red */
+    font-size: 12px; /* Set the font size to a smaller value */
   }

@@ -1,13 +1,20 @@
 const { createPokemon, getPokemonById, getAllPokemons , searchPokemonByNames } = require('../controllers/getPokemon')
 
 const getPokemonsHandler = async (req, res) => {
-    try{
-        const pokemon = await searchPokemonByNames(req , res);
+    try {
+      if (req.query && Object.keys(req.query).length > 0) {
+        // If the request has a query, call searchPokemonByNames
+        const pokemon = await searchPokemonByNames(req, res);
         res.status(200).json(pokemon);
+      } else {
+        // If there's no query, call getAllPokemons
+        const allPokemons = await getAllPokemons();
+        res.status(200).json(allPokemons);
+      }
     } catch (error) {
-        res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message });
     }
-};
+  };
 const getPokemonHandler = async (req,res) => {
     const { id } = req.params;
     const source = isNaN(id) ? 'Db' : 'api';

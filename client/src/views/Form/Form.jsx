@@ -65,12 +65,21 @@ const Form = () => {
     }
   }
 
-  const submitHandler = (event) => {
-    event.preventDefault()
-    const response = axios.post('https://localhost:3001/pokemon',form)
-    .then(res=>alert(res))
-    .catch(err=>alert(err))
-  }
+  const submitHandler = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const response = await axios.post('http://localhost:3001/pokemon/', form, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      alert('Success: ' + JSON.stringify(response.data));
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
+  };
 
   return (
     <form className={style.form} onSubmit={submitHandler}>
@@ -114,7 +123,7 @@ const Form = () => {
         <input type="text" value={form.type} onChange={changeHandler} name="type" />
         {errors.type && <span>{errors.type}</span>}
       </div>
-      <SubmitButton />
+      <SubmitButton onSubmit={submitHandler}/>
     </form>
   );
 };

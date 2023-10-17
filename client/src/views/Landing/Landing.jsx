@@ -1,9 +1,16 @@
+import React from "react";
+import style from "./Landing.module.css";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+
 const Landing = () => {
-    return(
-        <>
-        <h1>Esta es la vista de Landing</h1>
-        </>
-    )
-}
+  return (
+      <div className={style.container}>
+      <h1 className={style.logo}>Pokedex</h1>
+        <Link to='/home'>
+      <button className={style.button}>Ingresar a la Pokedex</button>
+    </Link>
+    </div>
+  );
+};
 
 export default Landing;

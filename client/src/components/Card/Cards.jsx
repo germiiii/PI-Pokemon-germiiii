@@ -1,42 +1,48 @@
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import style from './Cards.module.css'
+import React from 'react';
+import style from './Cards.module.css';
+import ProgressBar from '../../components/ProgressBar/ProgresBar';
+import PokemonType from '../../components/Type/Type'; 
+import { Link } from 'react-router-dom';
 
 const Cards = (props) => {
-    const getProgressBarStyle = (value) => {
-        return {
-            background: `linear-gradient(to right, #FF5733 ${value}%, #D8D8D8 ${value}%)`
-        };
-    };
+    // Ensure that props.type is an array, and if not, provide a default empty array.
+    const typeArray = Array.isArray(props.type) ? props.type : [];
 
     return (
         <div className={style.card}>
-           <Link to='/Detail'>
-            <p className={style.p}>id: {props.id}</p>
-            <p className={style.pokemonName}>Name: {props.name}</p>
-            <img src={props.image} alt={props.name} />
+            <Link to='/Detail'>
+                <p className={style.p}>id: {props.id}</p>
+                <p className={style.pokemonName}>Name: {props.name}</p>
+                <img src={props.image} alt={props.name} />
+            </Link> 
 
-                <p className={style.statName}>HP</p>
-            <div className={style['progress-bar']} data-label={props.hp} style={getProgressBarStyle(props.hp)}>
-            </div>
+            <p className={style.statName}>HP</p>
+            <ProgressBar value={props.hp} name='hp'/>
 
-                <p className={style.statName}>Attack</p>
-            <div className={style['progress-bar']} data-label={props.attack} style={getProgressBarStyle(props.attack)}>
-            </div>
+            <p className={style.statName}>Attack</p>
+            <ProgressBar value={props.attack} name='atk'/>
 
-                <p className={style.statName}>Defense</p>
-            <div className={style['progress-bar']} data-label={props.defense} style={getProgressBarStyle(props.defense)}>
-            </div>
+            <p className={style.statName}>Defense</p>
+            <ProgressBar value={props.defense} name='defense'/>
 
-                <p className={style.statName}>Speed</p>
-            <div className={style['progress-bar']} data-label={props.speed} style={getProgressBarStyle(props.speed)}>
-            </div>
+            <p className={style.statName}>Speed</p>
+            <ProgressBar value={props.speed} name='spd'/>
 
             <p className={style.height}>height: {props.height}</p>
             <p className={style.weight}>weight: {props.weight}</p>
-            <p className={style.type}>type: {props.type}</p>
-            </Link> 
+            
+            <div className={style.type}>
+             {Array.isArray(props.type)
+             ? props.type.map((pokemonType, index) => (
+            <PokemonType key={index} type={pokemonType} />
+              ))
+                 : <PokemonType key={0} type={props.type} />
+              }
+          </div>
         </div>
     );
 };
 
 export default Cards;
+
+
