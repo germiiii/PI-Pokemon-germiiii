@@ -21,23 +21,46 @@ const cleanArray = (arr) => {
   });
 };
 
-const getAllPokemons = async () => {
-  const databasePokemons = await Pokemon.findAll();
-  const apiResponse = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=12');
-  const apiPokemonsRAW = apiResponse.data.results;
 
-  // Separamos la request a la API para cada pokemon para obtener las stats
-  const apiPokemonsPromises = apiPokemonsRAW.map(pokemon => axios.get(pokemon.url));
-  const apiPokemonsResponses = await Promise.all(apiPokemonsPromises);
+const getAllPokemons = async (offset, limit) => {
+  try {
+    // Make the API request with the provided offset and limit
+    const apiResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`);
+    const apiPokemonsRAW = apiResponse.data.results;
 
-  // Extraemos la data de la response
-  const apiPokemonsData = apiPokemonsResponses.map(response => response.data);
+    // Separate the request to the API for each Pokémon to obtain stats
+    const apiPokemonsPromises = apiPokemonsRAW.map(pokemon => axios.get(pokemon.url));
+    const apiPokemonsResponses = await Promise.all(apiPokemonsPromises);
 
-  // Limpiamos la data 
-  const apiPokemons = cleanArray(apiPokemonsData);
+    // Extract the data from the responses
+    const apiPokemonsData = apiPokemonsResponses.map(response => response.data);
 
-  return [...databasePokemons, ...apiPokemons];
+    // Clean the data
+    const apiPokemons = cleanArray(apiPokemonsData);
+
+    return apiPokemons;
+  } catch (error) {
+    res.status(501).json({error:'hace las cosas bien '});
+  }
 };
+
+// const getAllPokemons = async () => {
+//   const databasePokemons = await Pokemon.findAll();
+//   const apiResponse = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=120');
+//   const apiPokemonsRAW = apiResponse.data.results;
+
+//   // Separamos la request a la API para cada pokemon para obtener las stats
+//   const apiPokemonsPromises = apiPokemonsRAW.map(pokemon => axios.get(pokemon.url));
+//   const apiPokemonsResponses = await Promise.all(apiPokemonsPromises);
+
+//   // Extraemos la data de la response
+//   const apiPokemonsData = apiPokemonsResponses.map(response => response.data);
+
+//   // Limpiamos la data 
+//   const apiPokemons = cleanArray(apiPokemonsData);
+
+//   return [...databasePokemons, ...apiPokemons];
+// };
 
 
 const getPokemonById = async (id, source) => {
@@ -54,10 +77,14 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
 
 
 const searchPokemonByNames = async (req, res) => {
-  const { name } = req.query;
-  const { language = 'en' } = req.query;
-  console.log(name);
   try {
+    const { name } = req.query;
+    const { language = 'en' } = req.query;
+
+    if (!name || typeof name !== 'string') {
+      return res.status(400).json({ error: 'Invalid or missing name parameter' });
+    }
+
     const lowerCaseName = name.toLowerCase();
     const databasePokemons = await Pokemon.findAll({
       attributes: ['name'],

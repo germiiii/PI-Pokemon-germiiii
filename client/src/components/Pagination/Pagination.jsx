@@ -1,20 +1,22 @@
-// import React from "react";
-// import style from './Pagination.module.css'
+import React from 'react';
 
-// const Pagination = ({ totalCards, cardsPerPage, setCurrentPage, currentPage }) => {
-//     let pages = [];
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const pageButtons = [];
 
-//     for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
-//         pages.push(i);
-//     }
+  // Create buttons for each page
+  for (let page = 1; page <= totalPages; page++) {
+    pageButtons.push(
+      <button key={page} onClick={() => onPageChange(page)} disabled={page === currentPage}>
+        Page {page}
+      </button>
+    );
+  }
 
-//     return (
-//         <div className="pagination">
-//             {pages.map((page, index) => (
-//                 <button key={index} onClick={() => setCurrentPage(page)} className={page === currentPage ? style.active : ''}>{page}</button>
-//             )}
-//         </div>
-//     )
-// }
+  return (
+    <div className="pagination">
+      {pageButtons}
+    </div>
+  );
+};
 
-// export default Pagination;
+export default Pagination;
