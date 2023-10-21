@@ -3,17 +3,23 @@ const { createPokemon, getPokemonById, getAllPokemons , searchPokemonByNames } =
 const getPokemonsHandler = async (req, res) => {
   try {
     const { offset, limit } = req.query;
-
     if (offset && limit) {
       const pokemonSubset = await getAllPokemons(offset, limit);
       res.status(200).json(pokemonSubset);
-    } else if (req.query && Object.keys(req.query).length > 0) {
-      const pokemon = await searchPokemonByNames(req, res);
-      res.status(200).json(pokemon);
     } else {
-      const allPokemons = await getAllPokemons(0, 120); // Default to the first 120 Pokémon
+      const allPokemons = await getAllPokemons(0, 120);
       res.status(200).json(allPokemons);
     }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const searchPokemonByNameHandler = async (req, res) => {
+  try {
+        const { name } = req.query; // Assuming you are using route parameters
+        const pokemon = await searchPokemonByNames(req, res);
+         res.status(200).json(pokemon);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -44,5 +50,6 @@ const createPokemonHandler = async (req,res) => {
 module.exports = {
     createPokemonHandler,
     getPokemonHandler,
-    getPokemonsHandler
+    getPokemonsHandler,
+    searchPokemonByNameHandler
 }

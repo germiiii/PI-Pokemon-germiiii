@@ -9,9 +9,9 @@
 .fill {
   height: 100%;
   transition-property: width, background-color; /* Properties to transition */
-  transition-duration: 0.5s; /* Duration of 0.5 seconds */
+  transition-duration: 4s; /* Adjust duration as needed */
   transition-timing-function: ease-in-out; /* Timing function */
-  transition-delay: 100ms; 
+  transition-delay: 100ms;
 }
 
 .label {

@@ -1,22 +1,76 @@
-.mainContainer {
-    background-color: #F9DF23;
-    border: 1px solid #000;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px #000;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 10px;
-  }
-  
-  .mainContainer a {
-    color: #000;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-  }
-  
-  .mainContainer a:hover {
-    color: #FFF;
-  }
+.navBar {
+  background-color: #FF3855;
+  padding: 0.5rem;
+}
+
+.maxWidth {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.px-5 {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.h1 {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.button {
+  background-color: white;
+  color: #FF3855;
+  padding: 0.6rem 1rem; /* Increased padding for a larger hover area */
+  border-radius: 0.5rem;
+  font-weight: bold;
+  margin-right: 4rem; /* Increased margin for better separation */
+  transition: background-color 0.2s; /* Smooth transition on hover */
+}
+
+.button:hover {
+  background-color: #FF3855; /* Change background color on hover */
+  color: white; /* Change text color on hover */
+}
+
+.button:last-child {
+  margin-right: 0;
+}
+.searchBar {
+  display: flex;
+  padding: 0.6rem 1rem;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  width: auto;
+  height: auto;
+}
+
+.searchButton {
+  background-color: #FF3855;
+  color: white;
+  border: none;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 5px;
+}
+
+.searchButton:hover {
+  background-color: #ff1a41;
+}

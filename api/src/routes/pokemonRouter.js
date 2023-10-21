@@ -1,10 +1,10 @@
 const express = require('express');
-const { getPokemonHandler, getPokemonsHandler, createPokemonHandler } = require('../handlers/pokemonHandlers');
+const { getPokemonHandler, getPokemonsHandler, createPokemonHandler, searchPokemonByNameHandler } = require('../handlers/pokemonHandlers');
 
 const pokemonRouter = express.Router();
 
-pokemonRouter.get('/names', getPokemonsHandler);
-pokemonRouter.get('/name', getPokemonsHandler);
+pokemonRouter.get('/names/:name', searchPokemonByNameHandler);
+pokemonRouter.get('/name', searchPokemonByNameHandler);
 pokemonRouter.get('/', getPokemonsHandler);
 pokemonRouter.get('/:id', getPokemonHandler);
 pokemonRouter.post('/', createPokemonHandler);

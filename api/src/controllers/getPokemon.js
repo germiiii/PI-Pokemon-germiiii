@@ -7,6 +7,8 @@ const { Pokemon } = require('../db');
 
 const cleanArray = (arr) => {
   return arr.map((elem) => {
+    const types = elem.types.map(typeObj => typeObj.type.name);
+    
     return {
       id: elem.id,
       name: elem.name,
@@ -17,6 +19,7 @@ const cleanArray = (arr) => {
       speed: elem.stats[5].base_stat,
       height: elem.height, 
       weight: elem.weight,
+      types: types,
     };
   });
 };
@@ -78,7 +81,7 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
 
 const searchPokemonByNames = async (req, res) => {
   try {
-    const { name } = req.query;
+    const { name } = req.params;
     const { language = 'en' } = req.query;
 
     if (!name || typeof name !== 'string') {
@@ -87,7 +90,6 @@ const searchPokemonByNames = async (req, res) => {
 
     const lowerCaseName = name.toLowerCase();
     const databasePokemons = await Pokemon.findAll({
-      attributes: ['name'],
       where: {
         name: {
           [Op.iLike]: `%${lowerCaseName}%`,
@@ -97,23 +99,26 @@ const searchPokemonByNames = async (req, res) => {
 
     const apiPokemonsResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species`);
     const apiPokemons = apiPokemonsResponse.data.results;
-    const filteredApi = apiPokemons.filter((pokemon) => pokemon.name.toLowerCase().includes(lowerCaseName));
 
-    const translatedApiPokemons = await Promise.all(filteredApi.map(async (pokemon) => {
-      const pokemonSpeciesResponse = await axios.get(pokemon.url);
-      const translatedName = pokemonSpeciesResponse.data.names.find((nameObj) => nameObj.language.name === language)?.name;
-      return { name: translatedName || pokemon.name };
-    }));
+    const pokemonDataPromises = apiPokemons
+      .filter((pokemon) => pokemon.name.toLowerCase().includes(lowerCaseName))
+      .map(async (pokemon) => {
+        const pokemonSpeciesResponse = await axios.get(pokemon.url);
+        const pokemonData = await axios.get(pokemonSpeciesResponse.data.varieties[0].pokemon.url);
+        return pokemonData.data;
+      });
 
-    const allMatches = [...databasePokemons, ...translatedApiPokemons];
-    const exactMatches = allMatches.filter((pokemon) => pokemon.name.toLowerCase() === lowerCaseName);
+    const apiPokemonsData = await Promise.all(pokemonDataPromises);
 
-    res.status(200).json(exactMatches.length > 0 ? exactMatches : allMatches.length > 0 ? allMatches : null);
+    const allMatches = [...databasePokemons, ...apiPokemonsData];
+
+    return(cleanArray(allMatches));
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: 'Failed to search for Pokémon' });
   }
 };
+
 
 module.exports = {
   getAllPokemons,

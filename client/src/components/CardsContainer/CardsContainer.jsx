@@ -2,7 +2,7 @@ import Cards from "../Card/Cards";
 import style from "./CardsContainer.module.css";
 
 const CardsContainer = ({ pokemons }) => {
-  console.log(`cardscontainer:` , pokemons) //-----------------------------------------
+
   return (
     <div className={style.cardsContainer}>
       {pokemons.map((pokemon) => {
@@ -17,7 +17,7 @@ const CardsContainer = ({ pokemons }) => {
           speed={pokemon.speed}
           height={pokemon.height}
           weight={pokemon.weight}
-          type={pokemon.type}
+          type={pokemon.types}
         />
       })}
     </div>
@@ -25,4 +25,3 @@ const CardsContainer = ({ pokemons }) => {
 };
 
 export default CardsContainer;
-

@@ -1,0 +1,18 @@
+.button {
+    background-color: #FF3855;
+    border: none;
+    color: white;
+    padding: 0.5rem 0.75rem; /* Adjust padding as needed */
+    text-align: center;
+    font-size: 16px; /* Adjust font size as needed */
+    display: inline-block;
+    border-radius: 0.25rem; /* Adjust border radius as needed */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow for a raised effect */
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s;
+  }
+  
+  .button:hover {
+    background-color: #FF5675; /* Change background color on hover */
+  }

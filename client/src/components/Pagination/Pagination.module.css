@@ -1,0 +1,35 @@
+.paginationcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .paginationbutton {
+    background-color: #f56565;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+  }
+  
+  .paginationbutton:hover {
+    background-color: #e53e3e;
+  }
+  
+  .paginationspan {
+    background-color: #fc8181;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .paginationbutton:last-child {
+    margin-right: 0;
+  }
+  
+  .pagination-button-next {
+    margin-left: 0.5rem;
+  }
