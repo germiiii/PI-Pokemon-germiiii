@@ -5,6 +5,8 @@ export const GET_POKEMON = 'GET_POKEMON';
 export const GET_NEXT_BATCH = 'GET_NEXT_BATCH';
 export const SEARCH_POKEMON = 'SEARCH_POKEMON';
 export const CLEAN_SEARCH = 'CLEAN_SEARCH'
+export const FILTER_POKEMONS = 'FILTER_POKEMONS'
+
 
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -53,3 +55,8 @@ export const cleanSearchResults = () => {
 dispatch({ type: CLEAN_SEARCH})
   };
 };
+export const filterPokemons = (type, origin) => ({
+  type: FILTER_POKEMONS,
+  payload: { type, origin },
+});
+

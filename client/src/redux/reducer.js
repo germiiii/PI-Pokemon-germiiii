@@ -1,4 +1,4 @@
-import { GET_POKEMONS, GET_POKEMON, GET_NEXT_BATCH , SEARCH_POKEMON, CLEAN_SEARCH} from './actions';
+import { GET_POKEMONS, GET_POKEMON, GET_NEXT_BATCH , SEARCH_POKEMON, CLEAN_SEARCH, FILTER_POKEMONS} from './actions';
 
 const initialState = {
   pokemons: [],
@@ -8,7 +8,11 @@ const initialState = {
     next: null,
     previous: null,
     searchResults: [],
-    pokemon: []
+    pokemon: [],
+  },
+  filter: {
+    type:'',
+    origin:'',
   },
 };
 
@@ -34,11 +38,19 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         searchResults: action.payload,
       };
+      case FILTER_POKEMONS:
+        return {
+          ...state,
+          filter: {
+            type: action.payload.type,
+            origin: action.payload.origin,
+          },
+        };
 
     case GET_NEXT_BATCH:
       return {
         ...state,
-        pokemons: [...state.pokemons, ...action.payload], // Merge the new batch with the existing Pokémon data
+        pokemons: [...state.pokemons, ...action.payload], 
       };
 
     default:

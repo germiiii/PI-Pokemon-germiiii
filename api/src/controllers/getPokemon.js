@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const axios = require('axios');
 const { Op } = require('sequelize');
-
-const { Pokemon } = require('../db');
+const { Pokemon, Type} = require('../db');
 
 
 const cleanArray = (arr) => {
@@ -27,21 +26,24 @@ const cleanArray = (arr) => {
 
 const getAllPokemons = async (offset, limit) => {
   try {
-    // Make the API request with the provided offset and limit
+    const dbPokemons = await Pokemon.findAll({ include:[Type]})
+    // Hacemos la peticion a la API con los parametros offset y limit
     const apiResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`);
     const apiPokemonsRAW = apiResponse.data.results;
 
-    // Separate the request to the API for each Pokémon to obtain stats
+    // Separamos la peticion de la api por cada pokemon para obtener las stats
     const apiPokemonsPromises = apiPokemonsRAW.map(pokemon => axios.get(pokemon.url));
     const apiPokemonsResponses = await Promise.all(apiPokemonsPromises);
 
-    // Extract the data from the responses
+    // Extraemos la data de la response
     const apiPokemonsData = apiPokemonsResponses.map(response => response.data);
 
-    // Clean the data
+    // Limpiamos
     const apiPokemons = cleanArray(apiPokemonsData);
+    
+    const allPokemons = [...dbPokemons,...apiPokemons]
 
-    return apiPokemons;
+    return allPokemons;
   } catch (error) {
     res.status(501).json({error:'hace las cosas bien '});
   }
@@ -74,8 +76,42 @@ const getPokemonById = async (id, source) => {
   return cleanArray([pokemon])
 };
 
-const createPokemon = async (name, image, hp, attack, defense, speed, height, weight) => {
-  await Pokemon.create({ name, image, hp, attack, defense, speed, height, weight });
+const createPokemon = async (name, image, hp, attack, defense, speed, height, weight, types) => {
+  if (!Array.isArray(types)) {
+    types = [types];
+  }
+
+  const typePromises = types.map(async (typeName) => {
+
+    // Perform a lookup to find the typeId for the specified type name.
+    const type = await Type.findOne({
+      where: { name: types },
+  });
+
+
+  if (!type) {
+    throw new Error(`Type "${types}" not found.`);
+  }
+  return type;
+ });
+
+  const foundTypes = await Promise.all(typePromises);
+
+  const newPokemon = await Pokemon.create({
+    name,
+    image,
+    hp,
+    attack,
+    defense,
+    speed,
+    height,
+    weight,
+  });
+
+  // Associate the Pokemon with the found type.
+  await newPokemon.addType(foundTypes);
+
+  return newPokemon;
 };
 
 
@@ -105,16 +141,15 @@ const searchPokemonByNames = async (req, res) => {
       .map(async (pokemon) => {
         const pokemonSpeciesResponse = await axios.get(pokemon.url);
         const pokemonData = await axios.get(pokemonSpeciesResponse.data.varieties[0].pokemon.url);
-        return pokemonData.data;
+        return cleanArray(pokemonData.data);
       });
 
     const apiPokemonsData = await Promise.all(pokemonDataPromises);
 
     const allMatches = [...databasePokemons, ...apiPokemonsData];
 
-    return(cleanArray(allMatches));
+    return(allMatches);
   } catch (error) {
-    console.error(error);
     res.status(400).json({ error: 'Failed to search for Pokémon' });
   }
 };

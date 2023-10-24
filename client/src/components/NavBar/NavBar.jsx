@@ -52,7 +52,7 @@ const NavBar = () => {
               Search
             </button>
           </div>
-          <div>
+          <div className='buttoncontainer'>
             <Link to="/home">
               <button className={styles.button}>Home</button>
             </Link>
