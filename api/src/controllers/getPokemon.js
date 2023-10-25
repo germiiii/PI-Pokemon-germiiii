@@ -22,11 +22,29 @@ const cleanArray = (arr) => {
     };
   });
 };
-
+const cleanDb = (arr) => {
+  return arr.map((pokemon) => {
+    return {
+      id: pokemon.id,
+      name: pokemon.name,
+      image:pokemon.image,
+      hp:pokemon.hp,
+      attack:pokemon.attack,
+      defense:pokemon.defense,
+      speed:pokemon.speed,
+      height:pokemon.height,
+      weight:pokemon.weight,
+      types: pokemon.types?.map((type) => (type.name)),
+    }
+  })
+}
 
 const getAllPokemons = async (offset, limit) => {
   try {
-    const dbPokemons = await Pokemon.findAll({ include:[Type]})
+    const dbPokemons = await Pokemon.findAll({ include: {model:Type, attributes: ['id','name']}});
+    
+    const formattedPokemons = cleanDb(dbPokemons)
+
     // Hacemos la peticion a la API con los parametros offset y limit
     const apiResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`);
     const apiPokemonsRAW = apiResponse.data.results;
@@ -41,31 +59,13 @@ const getAllPokemons = async (offset, limit) => {
     // Limpiamos
     const apiPokemons = cleanArray(apiPokemonsData);
     
-    const allPokemons = [...dbPokemons,...apiPokemons]
+    const allPokemons = [...formattedPokemons,...apiPokemons]
 
     return allPokemons;
   } catch (error) {
     res.status(501).json({error:'hace las cosas bien '});
   }
 };
-
-// const getAllPokemons = async () => {
-//   const databasePokemons = await Pokemon.findAll();
-//   const apiResponse = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=120');
-//   const apiPokemonsRAW = apiResponse.data.results;
-
-//   // Separamos la request a la API para cada pokemon para obtener las stats
-//   const apiPokemonsPromises = apiPokemonsRAW.map(pokemon => axios.get(pokemon.url));
-//   const apiPokemonsResponses = await Promise.all(apiPokemonsPromises);
-
-//   // Extraemos la data de la response
-//   const apiPokemonsData = apiPokemonsResponses.map(response => response.data);
-
-//   // Limpiamos la data 
-//   const apiPokemons = cleanArray(apiPokemonsData);
-
-//   return [...databasePokemons, ...apiPokemons];
-// };
 
 
 const getPokemonById = async (id, source) => {
@@ -77,26 +77,22 @@ const getPokemonById = async (id, source) => {
 };
 
 const createPokemon = async (name, image, hp, attack, defense, speed, height, weight, types) => {
-  if (!Array.isArray(types)) {
-    types = [types];
-  }
+  // Perform a lookup to find the type IDs for the specified type names.
+  const typeIds = [];
 
-  const typePromises = types.map(async (typeName) => {
-
-    // Perform a lookup to find the typeId for the specified type name.
+  for (const typeName of types) {
     const type = await Type.findOne({
-      where: { name: types },
-  });
+      where: { name: typeName },
+    });
 
+    if (!type) {
+      throw new Error(`Type "${typeName}" not found.`);
+    }
 
-  if (!type) {
-    throw new Error(`Type "${types}" not found.`);
+    typeIds.push(type.id);
   }
-  return type;
- });
 
-  const foundTypes = await Promise.all(typePromises);
-
+  // Create the new Pokémon record.
   const newPokemon = await Pokemon.create({
     name,
     image,
@@ -108,11 +104,13 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
     weight,
   });
 
-  // Associate the Pokemon with the found type.
-  await newPokemon.addType(foundTypes);
+  // Associate the Pokémon with the found types.
+  await newPokemon.setTypes(typeIds);
 
   return newPokemon;
 };
+
+
 
 
 const searchPokemonByNames = async (req, res) => {

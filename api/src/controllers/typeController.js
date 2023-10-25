@@ -1,20 +1,38 @@
 const { Router } = require('express');
-const { Type }= require('../db');
+const { Type } = require('../db');
 const axios = require('axios');
 
-const cleanType = (arr) => {
-    return arr.map(elem => {
-      return {
-        name: elem.name
-      };
-    });
-  };
-
 const getType = async (req, res) => {
-    const DBTypesRAW = await Type.findAll();
-    const apiTypesRaw = (await axios.get(`https://pokeapi.co/api/v2/type`)).data;
-    const apiTypesArray = Object.values(apiTypesRaw.results);
-     const apiT = cleanType(apiTypesArray)
-    return [...DBTypesRAW, ...apiT];
-  };
-module.exports = {getType}
+  try {
+    // Fetch types from the API
+    const response = await axios.get('https://pokeapi.co/api/v2/type');
+    const apiTypes = response.data.results;
+
+    // Extract type names from the API response
+    const typeNames = apiTypes.map((type) => {
+      const typeName = type.name;
+      return { name: typeName };
+    });
+
+    const createdTypes = await Promise.all(
+      typeNames.map(async (typeName) => {
+        try {
+          return Type.findOrCreate({
+            where: { name: typeName.name },
+            defaults: typeName,
+          });
+        } catch (error) {
+          console.error('Error creating or updating type:', error);
+        }
+      })
+    );
+
+    res.json(createdTypes);
+  } catch (error) {
+    console.error('Error fetching or saving types:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+module.exports = { getType };
