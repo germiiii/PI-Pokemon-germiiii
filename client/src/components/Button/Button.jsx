@@ -1,11 +1,9 @@
 import React from 'react';
 import styles from './Button.module.css'; // Import the CSS module
 
-const Button = () => {
+const Button = ({name}) => {
   return (
-    <button className={styles.button}>
-      Back to Pokedex
-    </button>
+    <button className={styles.button}>{name}</button>
   );
 };
 

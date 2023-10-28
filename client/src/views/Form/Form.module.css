@@ -23,6 +23,13 @@
 .form select {
   font-weight: bold;
 }
+.selected {
+  background-color: #0080ff; 
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(5px); 
+}
 
 .form select option {
   font-family: 'Courier New', monospace;
@@ -50,17 +57,31 @@
 .form button {
   background-color: #FF3855;
   color: white;
-  padding: 0.6rem 1rem;
+  padding: 0.6px 1px;
   border: none;
   border-radius: 0.5rem;
   font-weight: bold;
-  margin-right: 0.4rem;
+  margin-right: 3px;
   cursor: pointer;
   transition: background-color 0.2s;
   font-family: 'Courier New', monospace;
+  width: 100px;
+  height: 50px;
 }
-
+.typecont {
+  display: flex;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  margin-top: 10px; /* Adjust the margin as needed */
+}
 .form button:hover {
   background-color: #e53e3e;
   font-family: 'Courier New', monospace;
+}
+.typeGrid {
+  display:grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 5px; 
+  align-items: center;
 }

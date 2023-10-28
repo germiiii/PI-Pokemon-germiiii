@@ -2,9 +2,14 @@ import { useState } from "react";
 import style from './Form.module.css'
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import axios from 'axios'
+import { useDispatch } from "react-redux";
+import { createPokemon } from "../../redux/actions";
 
 
 const Form = () => {
+  
+  
+  
   const [form, setForm] = useState({
     name: "",
     hp: '',
@@ -12,11 +17,11 @@ const Form = () => {
     defense: '',
     speed: '',
     height: '',
-    type: "",
+    types: [],
     weight: '',
     image: "",
   });
-
+  
   const [errors, setErrors] = useState({
     name: "",
     hp: '',
@@ -24,22 +29,22 @@ const Form = () => {
     defense: '',
     speed: '',
     height: '',
-    type: "",
+    types: '',
     weight: '',
     image: "",
   });
-
+  
   const changeHandler = (event) => {
     const property = event.target.name;
-    const value = event.target.value;
-
+    const {value} = event.target;
+    
     // Update the form
     setForm({ ...form, [property]: value });
-
+    
     // Validate and update errors for the specific field
     validate(property, value);
   }
-
+  
   const validate = (property, value) => {
     if (property === 'hp' && !/^\d+$/.test(value)) {
       setErrors({ ...errors, hp: 'HP must be an integer' });
@@ -57,59 +62,62 @@ const Form = () => {
       setErrors({ ...errors, name: 'El nombre debe ser solo letras' });
     } else if (property === 'name' && value === '') {
       setErrors({ ...errors, name: 'Este campo es obligatorio' });
-    } else if (property === 'type' && !/^[a-zA-Z ,.'-]+$/.test(value)) {
-      setErrors({ ...errors, type: 'El type debe ser solo letras' });
-    } else if (property === 'type' && value === '') {
-      setErrors({ ...errors, type: 'Este campo es obligatorio' });
+    } else if (property === 'types' && !/^[a-zA-Z ,.'-]+$/.test(value)) {
+      setErrors({ ...errors, types: 'El types debe ser solo letras' });
+    } else if (property === 'types' && value === '') {
+      setErrors({ ...errors, types: 'Este campo es obligatorio' });
     }  else if (property === "image" && !isValidImageUrl(value)) {
-        setErrors({ ...errors, image: "Invalid image URL" });
+      setErrors({ ...errors, image: "Invalid image URL" });
     } else {
       // Clear the error message for the current field
       setErrors({ ...errors, [property]: '' });
     }
   }
-
+  
   const isValidImageUrl = (url) => {
     // Simple URL format validation, you can customize this as needed
     const urlPattern = /^https?:\/\/.+/i;
     return urlPattern.test(url);
   };
   
+  
+  const Types = [
+    'normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost',
+    'steel', 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon',
+    'dark', 'fairy', 'unknown', 'shadow'
+  ];
+  
+  const typeClickHandler = (selectedType) => {
+    // Copy the current types and handle up to 2 types
+    const newTypes = form.types.includes(selectedType)
+    ? form.types.filter((types) => types !== selectedType)
+    : form.types.length < 2
+    ? [...form.types, selectedType]
+    : form.types;
+    
+    setForm((prevForm) => ({
+      ...prevForm,
+      types: newTypes,
+    }));
+  };
+  const dispatch = useDispatch();
+  
+  console.log(form)
   const submitHandler = async (event) => {
     event.preventDefault();
-
-    console.log('Form object', form);
-    try {
-      const response = await axios.post('http://localhost:3001/pokemon', form, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (response.status === 201) {
-        // The request was successful (status code 201 - Created).
-        alert('Success: Pokémon created successfully.');
-      } else {
-        // Handle unexpected responses.
-        alert('Error: Unexpected response from the server.');
-      }
-    } catch (error) {
-      // Handle errors, including network errors, server errors, and validation errors.
-      if (error.response) {
-        // The request was made and the server responded with a status code outside the range of 2xx.
-        alert('Error: ' + error.response.data.message); // Use the specific error message from the server.
-      } else if (error.request) {
-        // The request was made but no response was received, or an error occurred when setting up the request.
-        alert('Error: No response from the server. Check your network connection.');
-      } else {
-        // Something happened in setting up the request that triggered an error.
-        alert('Error: ' + error.message);
+    console.log(form)
+    for (const key in errors) {
+      if(errors[key]) {
+        alert('Debes completar todo el formulario antes de enviar');
+        return;
       }
     }
+    
+    dispatch(createPokemon(form));
+    alert(form);
   };
-
   return (
-    <form className={style.form} onSubmit={submitHandler}>
+    <form className={style.form} >
       <div>
         <label>Name</label>
         <input type="text" value={form.name} onChange={changeHandler} name="name" />
@@ -145,35 +153,24 @@ const Form = () => {
         <input type="number" min="1" step="1" value={form.weight} onChange={changeHandler} name="weight" />
         {errors.weight && <span>{errors.weight}</span>}
       </div>
-      <div>
-      <label>Type</label>
+      <div >
+        <label>Type</label>
       </div>
-      <div>
-         <select value={form.type} onChange={changeHandler} name="type">
-           <option value="">Select a type</option>
-           <option value="Normal">Normal</option>
-           <option value="Fighting">Fighting</option>
-           <option value="Flying">Flying</option>
-           <option value="Poison">Poison</option>
-           <option value="Ground">Ground</option>
-           <option value="Rock">Rock</option>
-           <option value="Bug">Bug</option>
-           <option value="Ghost">Ghost</option>
-           <option value="Steel">Steel</option>
-           <option value="Fire">Fire</option>
-           <option value="Water">Water</option>
-           <option value="Grass">Grass</option>
-           <option value="Electric">Electric</option>
-           <option value="Psychic">Psychic</option>
-           <option value="Ice">Ice</option>
-           <option value="Dragon">Dragon</option>
-           <option value="Dark">Dark</option>
-           <option value="Fairy">Fairy</option>
-           <option value="Unknown">Unknown</option>
-           <option value="Shadow">Shadow</option>
-         </select>
-         {errors.type && <span>{errors.type}</span>}
-        </div>
+      <div className={style.typecont}>
+  <div className={style.typeGrid}>
+    {Types.map((types) => (
+      <button
+        key={types}
+        type="button" // Add this line to prevent form submission
+        className={`types-button ${form.types.includes(types) ? style.selected : ''}`}
+        onClick={() => typeClickHandler(types)}
+      >
+        {types}
+      </button>
+      ))}
+        {errors.types && <span>{errors.types}</span>}
+      </div>
+      </div>
         <div>
           <label>Image URL</label>
           <input type="text" value={form.image} onChange={changeHandler} name="image" />

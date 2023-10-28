@@ -1,4 +1,4 @@
-import { GET_POKEMONS, GET_POKEMON, GET_NEXT_BATCH , SEARCH_POKEMON, CLEAN_SEARCH, FILTER_POKEMONS} from './actions';
+import { GET_POKEMONS, GET_POKEMON, GET_NEXT_BATCH , SEARCH_POKEMON, CLEAN_SEARCH, CREATE_POKEMON} from './actions';
 
 const initialState = {
   pokemons: [],
@@ -10,13 +10,10 @@ const initialState = {
     searchResults: [],
     pokemon: [],
   },
-  filter: {
-    type:'',
-    origin:'',
-  },
 };
 
 const rootReducer = (state = initialState, action) => {
+  console.log('reducer',action.payload)
   switch (action.type) {
     case GET_POKEMONS:
       return {
@@ -38,16 +35,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         searchResults: action.payload,
       };
-      case FILTER_POKEMONS:
-        return {
-          ...state,
-          filter: {
-            type: action.payload.type,
-            origin: action.payload.origin,
-          },
-        };
 
     case GET_NEXT_BATCH:
+      return {
+        ...state,
+        pokemons: [...state.pokemons, ...action.payload], 
+      };
+    case CREATE_POKEMON:
       return {
         ...state,
         pokemons: [...state.pokemons, ...action.payload], 
@@ -55,7 +49,7 @@ const rootReducer = (state = initialState, action) => {
 
     default:
       return { ...state };
-  }
+  };
 };
 
 export default rootReducer;

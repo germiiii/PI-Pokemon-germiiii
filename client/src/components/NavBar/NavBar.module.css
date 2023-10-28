@@ -1,6 +1,7 @@
 .navBar {
   background-color: #FF3855;
   padding: 0.5rem;
+  max-width: 100%;
 }
 
 .maxWidth {
@@ -12,6 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 70%;
 }
 
 .px-5 {
@@ -30,8 +32,20 @@
   color: #FF3855;
   padding: 0.6rem 1rem; /* Increased padding for a larger hover area */
   border-radius: 0.5rem;
+  border-color: rgb(146, 146, 146);
   font-weight: bold;
-  margin-right: 4rem; /* Increased margin for better separation */
+  margin-left: 30px;
+  transition: background-color 0.2s; /* Smooth transition on hover */
+}
+.sbutton {
+  background-color: white;
+  color: #FF3855;
+  padding: 0.6rem 1rem; /* Increased padding for a larger hover area */
+  border-radius: 0.5rem;
+  border-color: rgb(146, 146, 146);
+  font-weight: bold;
+  font-size: x-small;
+  margin-left: 30px;
   transition: background-color 0.2s; /* Smooth transition on hover */
 }
 
@@ -52,8 +66,7 @@
   flex: 1;
   padding: 0.6rem 1rem;
   border: none;
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+  border-radius:5px;
   width: auto;
   height: auto;
 }
@@ -77,6 +90,7 @@
 
 .buttoncontainer{
   display: flex;
-  align-items: row;
-  
+  height: 39px;
+  margin-left: 30%;
+  align-items: center;
 }

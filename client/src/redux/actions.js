@@ -5,7 +5,7 @@ export const GET_POKEMON = 'GET_POKEMON';
 export const GET_NEXT_BATCH = 'GET_NEXT_BATCH';
 export const SEARCH_POKEMON = 'SEARCH_POKEMON';
 export const CLEAN_SEARCH = 'CLEAN_SEARCH'
-export const FILTER_POKEMONS = 'FILTER_POKEMONS'
+export const CREATE_POKEMON = 'CREATE_POKEMON'
 
 
 export const getPokemons = () => {
@@ -55,8 +55,20 @@ export const cleanSearchResults = () => {
 dispatch({ type: CLEAN_SEARCH})
   };
 };
-export const filterPokemons = (type, origin) => ({
-  type: FILTER_POKEMONS,
-  payload: { type, origin },
-});
+
+export const createPokemon = (formData) => {
+  return async function (dispatch) {
+    try {
+      const resp = await axios.post('http://localhost:3001/pokemon', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      console.log('action',formData)
+        dispatch({ type: CREATE_POKEMON, payload: resp.data });
+    } catch (error) {
+      console.error("Error searching Pokémon:", error);
+    }
+  };
+};
 

@@ -71,7 +71,7 @@ const getAllPokemons = async (offset, limit) => {
 const getPokemonById = async (id, source) => {
   const pokemon = source === 'api'
   ? (await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)).data 
-  : await Pokemon.findByPk(id);
+  : await Pokemon.findByPk(id, {include:Type});
 
   return cleanArray([pokemon])
 };
@@ -115,8 +115,7 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
 
 const searchPokemonByNames = async (req, res) => {
   try {
-    const { name } = req.params;
-    const { language = 'en' } = req.query;
+    const {name, language = 'en'} = req.params;
 
     if (!name || typeof name !== 'string') {
       return res.status(400).json({ error: 'Invalid or missing name parameter' });
@@ -129,24 +128,32 @@ const searchPokemonByNames = async (req, res) => {
           [Op.iLike]: `%${lowerCaseName}%`,
         },
       },
+      include: Type,
     });
 
-    const apiPokemonsResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species`);
-    const apiPokemons = apiPokemonsResponse.data.results;
-
-    const pokemonDataPromises = apiPokemons
-      .filter((pokemon) => pokemon.name.toLowerCase().includes(lowerCaseName))
+    // const apiPokemonsResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species`);
+    // const apiPokemons = apiPokemonsResponse.data.results;
+    //console.log('todos',apiPokemons)
+    
+    const apiPokemonsResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1000`);
+    const apiPokemonsRAW = apiPokemonsResponse.data.results;
+    const apiPokemonsPromises = apiPokemonsRAW
+      .filter((pokemon) => pokemon.name.includes(lowerCaseName))
       .map(async (pokemon) => {
-        const pokemonSpeciesResponse = await axios.get(pokemon.url);
-        const pokemonData = await axios.get(pokemonSpeciesResponse.data.varieties[0].pokemon.url);
-        return cleanArray(pokemonData.data);
+        const response = await axios.get(pokemon.url); // Make a single request for each matching Pokemon
+        return response.data; // Return the data from the response
       });
 
-    const apiPokemonsData = await Promise.all(pokemonDataPromises);
+    const apiPokemonsData = await Promise.all(apiPokemonsPromises);
 
-    const allMatches = [...databasePokemons, ...apiPokemonsData];
+    // Clean the data from both sources
+    const dbPoke = cleanDb(databasePokemons);
+    const apiPoke = cleanArray(apiPokemonsData);
 
-    return(allMatches);
+    // Combine the results from the database and API
+    const allMatches = [...dbPoke, ...apiPoke];
+
+    return allMatches;
   } catch (error) {
     res.status(400).json({ error: 'Failed to search for Pokémon' });
   }

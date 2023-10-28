@@ -8,7 +8,7 @@ const CardsContainer = ({ pokemons }) => {
       {pokemons.map((pokemon) => {
        return <Cards
           key={pokemon.id}
-          id={pokemon.id}
+          id={(typeof pokemon.id === 'number') ? pokemon.id : null }
           name={pokemon.name}
           image={pokemon.image}
           hp={pokemon.hp}

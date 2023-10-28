@@ -4,7 +4,6 @@ const { getPokemonHandler, getPokemonsHandler, createPokemonHandler, searchPokem
 const pokemonRouter = express.Router();
 
 pokemonRouter.get('/names/:name', searchPokemonByNameHandler);
-pokemonRouter.get('/name', searchPokemonByNameHandler);
 pokemonRouter.get('/', getPokemonsHandler);
 pokemonRouter.get('/:id', getPokemonHandler);
 pokemonRouter.post('/', createPokemonHandler);

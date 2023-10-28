@@ -15,7 +15,11 @@ const Home = () => {
   const offsetIncrement = 120; // The increment for the offset
   // Filters
   const [selectedType, setSelectedType] = useState([]); // State for selected type
-  const pokemonsByType = []; // Object to store Pokémon by type
+  const [selectedOrigin, setSelectedOrigin] = useState('All');
+  // Sort
+  const [sortType, setSortType] = useState('none');
+  const [sortOrder, setSortOrder] = useState('asc')
+
 
   useEffect(() => {
     dispatch(getPokemons());
@@ -39,22 +43,46 @@ const Home = () => {
       dispatch(getNextBatch(offset + offsetIncrement, limit));
     }
   };
-  console.log('selectedType',selectedType)
-  //console.log('pokemons',pokemons)
-  const displayPokemons = (pokemons, selectedTypes) => {
+
+  const displayPokemons = (pokemons, selectedTypes, selectedOrigin) => {
     return pokemons.filter((pokemon) => {
-      console.log('pokemon.types',pokemon.types)
-      return selectedTypes.every((type) => pokemon.types.includes(type));
+      //console.log('pokemon.types',pokemon.types)
+      const typeFilters = selectedTypes.length === 0 || selectedTypes.every((type) => pokemon.types.includes(type));
+     
+      const originFilter = selectedOrigin === 'All' || (selectedOrigin === 'API' && Number.isInteger(pokemon.id) || (selectedOrigin === 'Database' && !Number.isInteger(pokemon.id))); 
+      return typeFilters && originFilter;
     });
   };
   
-  console.log('function',displayPokemons(pokemons,selectedType))
+  const sortPokemons = (pokemons) => {
+    // Sort the pokemons based on the selected sorting criteria
+    if (sortType === 'name') {
+      return pokemons.sort((a, b) => {
+        if (sortOrder === 'asc') {
+          return a.name.localeCompare(b.name);
+        } else {
+          return b.name.localeCompare(a.name);
+        }
+      });
+    } else if (sortType === 'attack') {
+      return pokemons.sort((a, b) => {
+        if (sortOrder === 'asc') {
+          return a.attack - b.attack;
+        } else {
+          return b.attack - a.attack;
+        }
+      });
+    } else {
+      return pokemons; // No sorting
+    }
+  };
+
+  //console.log('function',displayPokemons(pokemons,selectedType))
   //console.log('pokemonbytype',pokemonsByType	)
   
-  const result = (searchResults && searchResults.length > 0) ? searchResults : (pokemons && pokemons.length > 0) ? pokemons : [];
+  const result = (searchResults && searchResults.length > 0) ? searchResults :displayPokemons(pokemons, selectedType, selectedOrigin);
 
-
-
+  const sortedResult = sortPokemons(result)
 
   // Calculate the slice range based on the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -65,10 +93,15 @@ const Home = () => {
   return (
     <div>
       <div>
-      <FilterBar selectedType={selectedType} setSelectedType={setSelectedType} />
+      <FilterBar selectedType={selectedType}
+       setSelectedType={setSelectedType}
+        setSelectedOrigin={setSelectedOrigin}
+         selectedOrigin={selectedOrigin}
+         setSortOrder={setSortOrder}
+         setSortType={setSortType} 
+         sortOrder={sortOrder}/>
       </div>
-      <CardsContainer pokemons={result
-    .slice(startIndex, endIndex)} />
+      <CardsContainer pokemons={sortedResult.slice(startIndex, endIndex)} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );

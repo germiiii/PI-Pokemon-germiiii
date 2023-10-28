@@ -9,7 +9,7 @@ const Cards = (props) => {
     return (
       <div className={style.card}>
         <p className={style.pokemonName}>Name: {name}</p>
-        <p className={style.p}>id: {id}</p>
+        {id && <p className={style.p}>id: {id}</p>}
         <Link to={{
           pathname: '/detail',
           state: { id, name, image, height, weight, type , hp , attack ,defense, speed}

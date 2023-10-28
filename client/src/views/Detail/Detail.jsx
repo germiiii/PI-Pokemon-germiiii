@@ -19,7 +19,7 @@ const Detail = (props) => {
     <div className={style.pokedexDetail}>
     <div className={style.button}>
       <Link to="/home">
-        <Button />
+        <Button name={'Back to pokedex'} />
       </Link>
     </div>
   

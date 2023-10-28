@@ -52,12 +52,12 @@ const NavBar = () => {
               Search
             </button>
           </div>
-          <div className='buttoncontainer'>
+          <div className={styles.buttoncontainer}>
             <Link to="/home">
               <button className={styles.button}>Home</button>
             </Link>
             <Link to="/create">
-              <button className={styles.button}>Create Pokemon</button>
+              <button className={styles.sbutton}>Create Pokemon</button>
             </Link>
           </div>
         </div>

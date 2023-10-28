@@ -37,9 +37,9 @@ const getPokemonHandler = async (req,res) => {
 };
 
 const createPokemonHandler = async (req,res) => {
-    const { name , image , hp , attack , defense , speed , heigth , weight, types} = req.body;
+    const { name , image , hp , attack , defense , speed , height , weight, types} = req.body;
     try{
-    const newPokemon = await createPokemon( name , image , hp , attack , defense , speed , heigth , weight, types);
+    const newPokemon = await createPokemon( name , image , hp , attack , defense , speed , height , weight, types);
     res.status(201).json({newPokemon})
     } catch (error) {
         res.status(500).json ({error: error.message})
