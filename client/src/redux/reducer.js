@@ -1,4 +1,4 @@
-import { GET_POKEMONS, GET_POKEMON, GET_NEXT_BATCH , SEARCH_POKEMON, CLEAN_SEARCH, CREATE_POKEMON} from './actions';
+import { GET_POKEMONS, GET_POKEMON, GET_NEXT_BATCH , SEARCH_POKEMON, CLEAN_SEARCH, CREATE_POKEMON, SORT_POKEMONS} from './actions';
 
 const initialState = {
   pokemons: [],
@@ -9,11 +9,12 @@ const initialState = {
     previous: null,
     searchResults: [],
     pokemon: [],
+    sortType: 'none',
+    sortOrder: 'asc'
   },
 };
 
 const rootReducer = (state = initialState, action) => {
-  console.log('reducer',action.payload)
   switch (action.type) {
     case GET_POKEMONS:
       return {
@@ -44,9 +45,8 @@ const rootReducer = (state = initialState, action) => {
     case CREATE_POKEMON:
       return {
         ...state,
-        pokemons: [...state.pokemons, ...action.payload], 
+        pokemons: [...state.pokemons, action.payload], 
       };
-
     default:
       return { ...state };
   };

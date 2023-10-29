@@ -1,6 +1,5 @@
 import { useState } from "react";
 import style from './Form.module.css'
-import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import axios from 'axios'
 import { useDispatch } from "react-redux";
 import { createPokemon } from "../../redux/actions";
@@ -102,19 +101,11 @@ const Form = () => {
   };
   const dispatch = useDispatch();
   
-  console.log(form)
+  //console.log(form)
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(form)
-    for (const key in errors) {
-      if(errors[key]) {
-        alert('Debes completar todo el formulario antes de enviar');
-        return;
-      }
-    }
-    
+    console.log('function',form)
     dispatch(createPokemon(form));
-    alert(form);
   };
   return (
     <form className={style.form} >
@@ -161,8 +152,8 @@ const Form = () => {
       </div>
       </div>
       <div>
-        <label>Type</label>
       </div>
+        <label>Type</label>
       <div className={style.typecont}>
   <div className={style.typeGrid}>
     {Types.map((types) => (
@@ -178,7 +169,7 @@ const Form = () => {
         {errors.types && <span>{errors.types}</span>}
       </div>
       </div>
-      <SubmitButton onSubmit={submitHandler}/>
+      <button onClick={submitHandler}>ola</button>
     </form>
   );
 };
