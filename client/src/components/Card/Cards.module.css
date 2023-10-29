@@ -15,6 +15,7 @@
   font-size: 16px;
   border-radius: 10px; /* Added rounded corners */
 
+
   /* Added transition for smoother hover effect */
   transition: box-shadow 0.2s ease-in-out;
 }
@@ -40,8 +41,8 @@
 }
 
 .card .image {
-  width: 100%;
-  height: auto;
+  max-width: 96px;
+  max-height: 96px;
 }
 
 .card .height {

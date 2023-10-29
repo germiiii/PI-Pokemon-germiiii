@@ -24,7 +24,6 @@ const Detail = (props) => {
     </div>
   
     <div className={style.pokename}>
-    <h1 className={style.title}>Details</h1>
     <h2 className={style.pokemonName}>{state.name}</h2>
     </div>
     <div className={style.id}>
@@ -59,7 +58,7 @@ const Detail = (props) => {
     </div>
     </div>
 
-    
+    <div className={style.size}>
     <p className={style.height}>Height: {state.height}</p>
     
    
@@ -67,6 +66,7 @@ const Detail = (props) => {
         <span className="gg-move-down"></span>
         Weight: {state.weight}
       </p>
+      </div>
     <div className={style.type}>
       {Array.isArray(state.type)
         ? state.type.map((pokemonType, index) => (

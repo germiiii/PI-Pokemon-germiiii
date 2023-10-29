@@ -118,42 +118,49 @@ const Form = () => {
   };
   return (
     <form className={style.form} >
+      <div className={style.inputContainer}>
       <div>
         <label>Name</label>
-        <input type="text" value={form.name} onChange={changeHandler} name="name" />
+        <input type="text" value={form.name} onChange={changeHandler} name="name" className={style.inputFields}/>
         {errors.name && <span>{errors.name}</span>}
       </div>
       <div>
         <label>HP</label>
-        <input type="number" min="1" step="1" value={form.hp} onChange={changeHandler} name="hp" />
+        <input type="number" min="1" step="1" value={form.hp} onChange={changeHandler} name="hp" className={style.inputFields}/>
         {errors.hp && <span>{errors.hp}</span>}
       </div>
       <div>
         <label>ATK</label>
-        <input type="number" min="1" step="1" value={form.attack} onChange={changeHandler} name="attack" />
+        <input type="number" min="1" step="1" value={form.attack} onChange={changeHandler} name="attack" className={style.inputFields}/>
         {errors.attack && <span>{errors.attack}</span>}
       </div>
       <div>
         <label>DEF</label>
-        <input type="number" min="1" step="1" value={form.defense} onChange={changeHandler} name="defense" />
+        <input type="number" min="1" step="1" value={form.defense} onChange={changeHandler} name="defense" className={style.inputFields}/>
         {errors.defense && <span>{errors.defense}</span>}
       </div>
       <div>
         <label>SPD</label>
-        <input type="number" min="1" step="1" value={form.speed} onChange={changeHandler} name="speed" />
+        <input type="number" min="1" step="1" value={form.speed} onChange={changeHandler} name="speed" className={style.inputFields}/>
         {errors.speed && <span>{errors.speed}</span>}
       </div>
       <div>
         <label>Height</label>
-        <input type="number" min="1" step="1" value={form.height} onChange={changeHandler} name="height" />
+        <input type="number" min="1" step="1" value={form.height} onChange={changeHandler} name="height" className={style.inputFields} />
         {errors.height && <span>{errors.height}</span>}
       </div>
       <div>
         <label>Weight</label>
-        <input type="number" min="1" step="1" value={form.weight} onChange={changeHandler} name="weight" />
+        <input type="number" min="1" step="1" value={form.weight} onChange={changeHandler} name="weight" className={style.inputFields}/>
         {errors.weight && <span>{errors.weight}</span>}
       </div>
-      <div >
+      <div>
+        <label>Image URL</label>
+        <input type="text" value={form.image} onChange={changeHandler} name="image" className={style.inputFields}/>
+        {errors.image && <span>{errors.image}</span>}
+      </div>
+      </div>
+      <div>
         <label>Type</label>
       </div>
       <div className={style.typecont}>
@@ -161,7 +168,7 @@ const Form = () => {
     {Types.map((types) => (
       <button
         key={types}
-        type="button" // Add this line to prevent form submission
+        type="button" 
         className={`types-button ${form.types.includes(types) ? style.selected : ''}`}
         onClick={() => typeClickHandler(types)}
       >
@@ -171,11 +178,6 @@ const Form = () => {
         {errors.types && <span>{errors.types}</span>}
       </div>
       </div>
-        <div>
-          <label>Image URL</label>
-          <input type="text" value={form.image} onChange={changeHandler} name="image" />
-          {errors.image && <span>{errors.image}</span>}
-        </div>
       <SubmitButton onSubmit={submitHandler}/>
     </form>
   );

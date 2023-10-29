@@ -5,103 +5,178 @@
     display: inline-block;
     font-weight: bold;
     background-color: #F9DF23;
+    font-size: small;
   }
   .normal {
     background-color: #A8A77A;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
   }
   
   .fighting {
     background-color: #C22E28;
     color: white;
-  }
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 140px;
+    padding: 0 7px;
+    }
   
   .flying {
     background-color: #A98FF3;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 60px;
+    padding: 0 7px;
   }
   
   .poison {
     background-color: #A33EA1;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 60px;
+    padding: 0 7px;
   }
   
   .ground {
     background-color: #E2BF65;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 60px;
+    padding: 0 7px;
   }
   
   .rock {
     background-color: #B6A136;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    padding: 0 7px;
   }
   
   .bug {
     background-color: #A6B91A;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    padding: 0 7px;
   }
   
   .ghost {
     background-color: #735797;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 60px;
+    padding: 0 7px;
   }
   
   .steel {
     background-color: #B7B7CE;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 60px;
+    padding: 0 7px;
   }
   
   .fire {
     background-color: #EE8130;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    padding: 0 7px;
   }
   
   .water {
     background-color: #6390F0;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    padding: 0 7px;
   }
   
   .grass {
     background-color: #7AC74C;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 60px;
+    padding: 0 7px;
   }
   
   .electric {
     background-color: #F7D02C;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 70px;
+    padding: 0 7px;
   }
   
   .psychic {
     background-color: #F95587;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 65px;
+    padding: 0 7px;
   }
   
   .ice {
     background-color: #96D9D6;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 40px;
+    padding: 0 7px;
   }
   
   .dragon {
     background-color: #6F35FC;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 65px;
+    padding: 0 7px;
   }
   
   .dark {
     background-color: #705746;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 60px;
+    padding: 0 7px;
   }
   
   .fairy {
     background-color: #D685AD;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 60px;
+    padding: 0 7px;
   }
   
   .unknown {
     background-color: #B7B7CE;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 65px;
+    padding: 0 7px;
   }
   
   .shadow {
     background-color: #292929;
     color: white;
+    border-radius: 33px;
+    margin-left: 10px;
+    width: 65px;
+    padding: 0 7px;
   }

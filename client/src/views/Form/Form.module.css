@@ -4,6 +4,8 @@
   border: 2px solid #888888;
   border-radius: 0.5rem;
   font-family: 'Courier New', monospace;
+  display: flex; /* Display the form as a flex container */
+  justify-content: space-between; /* Space between items (input fields and type selection) */
 }
 
 .form label {
@@ -20,9 +22,6 @@
   font-family: 'Courier New', monospace;
 }
 
-.form select {
-  font-weight: bold;
-}
 .selected {
   background-color: #0080ff; 
   color: #fff;
@@ -31,27 +30,9 @@
   transform: translateY(5px); 
 }
 
-.form select option {
-  font-family: 'Courier New', monospace;
-}
-
-.form select::placeholder {
-  color: #888888;
-}
-
 .form span {
   color: #FF3855;
   font-weight: bold;
-}
-
-.form select {
-  padding: 0.2rem;
-}
-
-.form select,
-.form input[type="text"],
-.form input[type="number"] {
-  font-family: 'Courier New', monospace;
 }
 
 .form button {
@@ -84,4 +65,22 @@
   grid-template-rows: repeat(5, 1fr);
   gap: 5px; 
   align-items: center;
+  margin-right: 150px;
+}
+.inputContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 70%; /* Adjust the width as needed */
+justify-content: center;
+}
+
+.inputFields {
+  flex: 1; /* Take up available space within the input container */
+  padding: 1rem;
+}
+
+.typeSelection {
+  flex: 1; /* Take up available space within the input container */
+  padding: 1rem;
 }
