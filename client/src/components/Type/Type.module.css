@@ -1,5 +1,5 @@
 .type {
-    padding: 5px 10px;
+    padding: 5px;
     border-radius: 10px;
     margin: 2px;
     display: inline-block;
@@ -19,7 +19,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 140px;
+    
     padding: 0 7px;
     }
   
@@ -28,8 +28,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 60px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .poison {
@@ -37,8 +36,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 60px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .ground {
@@ -46,8 +44,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 60px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .rock {
@@ -71,8 +68,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 60px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .steel {
@@ -80,8 +76,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 60px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .fire {
@@ -105,8 +100,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 60px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .electric {
@@ -114,8 +108,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 70px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .psychic {
@@ -123,8 +116,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 65px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .ice {
@@ -132,8 +124,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 40px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .dragon {
@@ -141,8 +132,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 65px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .dark {
@@ -150,8 +140,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 60px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .fairy {
@@ -159,8 +148,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 60px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .unknown {
@@ -168,8 +156,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 65px;
-    padding: 0 7px;
+        padding: 0 7px;
   }
   
   .shadow {
@@ -177,6 +164,5 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    width: 65px;
-    padding: 0 7px;
+        padding: 0 7px;
   }

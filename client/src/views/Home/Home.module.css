@@ -1,3 +1,27 @@
-div {
-    background-color: #F9DF23;
+
+      .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      
+      .loading:after {
+        content: ' ';
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 4px solid #ccc;
+        border-top: 4px solid #333;
+        animation: spin 1s linear infinite;
       }

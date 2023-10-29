@@ -4,25 +4,30 @@ import Pagination from '../../components/Pagination/Pagination';
 import { getNextBatch, getPokemons } from '../../redux/actions';
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
 import FilterBar from '../../components/FilterBar/FilterBar';
+import styles from './Home.module.css'
 
 const Home = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
   const searchResults = useSelector((state) => state.searchResults);
-  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const [offset, setOffset] = useState(0); // Keep track of offset
-  const offsetIncrement = 120; // The increment for the offset
+  const offsetIncrement = 120; 
+  const [loading, setLoading] = useState(true);
   // Filters
-  const [selectedType, setSelectedType] = useState([]); // State for selected type
+  const [selectedType, setSelectedType] = useState([]); 
   const [selectedOrigin, setSelectedOrigin] = useState('All');
   // Sort
   const [sortType, setSortType] = useState('none');
   const [sortOrder, setSortOrder] = useState('asc')
-
+// Pagination  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [offset, setOffset] = useState(0); 
 
   useEffect(() => {
-    dispatch(getPokemons());
+    dispatch(getPokemons()).then(() => {
+      // When data is ready, set loading to false
+      setLoading(false);
+    });
   }, []);
   // console.log(pokemons)
   const totalPages = Math.ceil(pokemons.length / itemsPerPage) + 1;
@@ -90,21 +95,29 @@ const Home = () => {
 
  //console.log('result',result)
 
-  return (
+ return (
+  <div>
     <div>
-      <div>
-      <FilterBar selectedType={selectedType}
-       setSelectedType={setSelectedType}
+      <FilterBar
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
         setSelectedOrigin={setSelectedOrigin}
-         selectedOrigin={selectedOrigin}
-         setSortOrder={setSortOrder}
-         setSortType={setSortType} 
-         sortOrder={sortOrder}/>
-      </div>
-      <CardsContainer pokemons={sortedResult.slice(startIndex, endIndex)} />
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+        selectedOrigin={selectedOrigin}
+        setSortOrder={setSortOrder}
+        setSortType={setSortType}
+        sortOrder={sortOrder}
+      />
     </div>
-  );
+    {loading ? (
+      <div className={styles.loading}></div>
+    ) : (
+      <div>
+        <CardsContainer pokemons={sortedResult.slice(startIndex, endIndex)} />
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      </div>
+    )}
+  </div>
+);
 };
 
 export default Home;

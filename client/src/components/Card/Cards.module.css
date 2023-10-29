@@ -2,18 +2,22 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  max-width: 191.91px ;
+  max-height: 210px;
 }
 
 .card {
-  width: calc(15% - 20px); /* Decreased the width to make it smaller */
-  height: calc(30% - 30px);
+  width: 191.91px; /* Fixed width */
+  height: 210px; /* Fixed height */
   margin: 10px;
   padding: 10px;
   border: 1px solid #acabab;
   background-color: #e9e9e9;
   font-family: 'Press Start 2P', sans-serif;
   font-size: 16px;
-  border-radius: 10px; /* Added rounded corners */
+  border-radius: 10px;
+  max-width: 191.91px ;
+  max-height: 210px;
 
 
   /* Added transition for smoother hover effect */
@@ -24,25 +28,31 @@
   box-shadow: 0px 0px 10px #000;
 }
 
-.card .text {
-  margin: 0;
-  padding: 0;
-}
-
 .card p {
   font-size: 12px;
   line-height: 16px;
-}
-
-.card .name {
-  font-size: 16px;
-  font-weight: bold;
   
 }
 
-.card .image {
+.type{
+  display: flex;
+  flex-direction: column;
+
+}
+.cont{
+  background-color: #cccccc;
+  /* border-radius: 30px; */
+  height: 45px;
+  transform: skewX(-10deg);
+}
+.img {
   max-width: 96px;
   max-height: 96px;
+  padding: 10px;
+  border-radius: 30px;
+}
+.imagecont {
+ padding: 30px;
 }
 
 .card .height {
@@ -58,11 +68,9 @@
 /* Apply the font to the specific class */
 .pokemonName {
   font-family: 'Press Start 2P', cursive;
-  font-size: 16px;
-}
+  }
 
 /* Similarly, apply the font to the ID (if needed) */
 .p {
   font-family: 'Press Start 2P', cursive;
-  font-size: 16px;
 }

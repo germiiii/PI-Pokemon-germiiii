@@ -8,15 +8,18 @@ const Cards = (props) => {
   
     return (
       <div className={style.card}>
-        <p className={style.pokemonName}>Name: {name}</p>
+        <div className={style.cont}>
+        <p className={style.pokemonName}>{name}</p>
         {id && <p className={style.p}>id: {id}</p>}
+        </div>
+        <div className={style.imgcont}>
         <Link to={{
           pathname: '/detail',
           state: { id, name, image, height, weight, type , hp , attack ,defense, speed}
         }}>
-          <img src={image} alt={name} />
+          <img src={image} alt={name} className={style.img} />
         </Link>
-
+        </div>
         <div className={style.type}>
           {Array.isArray(type)
             ? type.map((pokemonType, index) => (
