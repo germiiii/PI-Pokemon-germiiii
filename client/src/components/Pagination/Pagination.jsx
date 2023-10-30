@@ -15,7 +15,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, maxButtonsToShow = 
         key={page}
         onClick={() => onPageChange(page)}
         disabled={page === currentPage}
-        className={styles.paginationbutton}
+        className={`${styles.paginationbutton} ${page === currentPage ? styles.currentButton : ''}`}
       >
         {page}
       </button>

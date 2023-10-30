@@ -23,6 +23,7 @@ const Cards = (props) => {
         <div className={style.type}>
           {Array.isArray(type)
             ? type.map((pokemonType, index) => (
+              
                 <PokemonType key={index} type={pokemonType} />
               ))
             : <PokemonType key={0} type={type} />

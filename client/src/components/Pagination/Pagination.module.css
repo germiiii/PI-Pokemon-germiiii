@@ -33,3 +33,7 @@
   .pagination-button-next {
     margin-left: 0.5rem;
   }
+  .currentButton {
+    background-color: #ff0000;
+    color: #ffffff;
+  }

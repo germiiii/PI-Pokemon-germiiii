@@ -153,8 +153,8 @@ const Form = () => {
       </div>
       <div>
       </div>
-        <label>Type</label>
       <div className={style.typecont}>
+        <label>Type</label>
   <div className={style.typeGrid}>
     {Types.map((types) => (
       <button
@@ -169,7 +169,9 @@ const Form = () => {
         {errors.types && <span>{errors.types}</span>}
       </div>
       </div>
-      <button onClick={submitHandler}>ola</button>
+      <div className={style.sendCont}>
+      <button className={style.send} onClick={submitHandler}>Crear</button>
+      </div>    
     </form>
   );
 };

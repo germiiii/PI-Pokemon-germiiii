@@ -1,12 +1,13 @@
 .type {
-    padding: 5px;
-    border-radius: 10px;
-    margin: 2px;
-    display: inline-block;
-    font-weight: bold;
-    background-color: #F9DF23;
-    font-size: small;
-  }
+  padding: 5px;
+  border-radius: 10px;
+  margin: 2px;
+  display: inline-block;
+  font-weight: bold;
+  font-size: small;
+  background-color: #F9DF23;
+  position: relative; /* Add position relative to contain the icon */
+}
   .normal {
     background-color: #A8A77A;
     color: white;
