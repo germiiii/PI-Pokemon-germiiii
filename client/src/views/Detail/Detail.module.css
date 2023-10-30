@@ -26,6 +26,22 @@
   height: 500px;
   margin-top: 10px;
 }
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-70%);
+    opacity: 2;
+  }
+  100% {
+    transform: translateX(50px);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 30px; 
+    transform: skewX(10deg);
+  }
+}
+.slide-in-from-left {
+  animation: slideInFromLeft 1s ease-out;
+
+}
 .pokename{
   width: 250px;
   height: 00px;
@@ -36,6 +52,7 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 30px; 
   transform: skewX(10deg);
+  
 }
 .pokemonName {
   font-size: 35px;
@@ -50,16 +67,9 @@
   position: absolute;
   left:100px;
   display: flex;
-  align-items: center;
-}
-.p .gg-hashtag {
-  width: 20px; 
-  height: 20px;
-  background-size: cover; 
-  align-items: center;
-  display: flex;
-}
+  align-items: left;
 
+}
 .stat {
   width: 280px;
   padding: 10px;
@@ -71,7 +81,7 @@
 .statName {
   font-size: 16px;
   font-weight: bold;
-  font-family:sans-serif;
+  font-family: 'Press Start 2P', cursive;
 }
 .size {
   display: flex;
@@ -83,7 +93,6 @@
   padding: 0 20px; /* Add padding for spacing */
 }
 
-  
   .image {
     width: 400px;
     height: 400px;
@@ -96,11 +105,16 @@
     width: 300px;
     display: flex;
     justify-content: center;
+    background-color: #afafaf;
     flex-wrap: wrap;
     position: absolute;
     z-index: 10;
+    padding: 10px 15px;
     margin-left: 30%;
+    margin-top: 5%;
+    border-radius: 30px;
     flex-direction: column;
+    font-family: 'Press Start 2P', cursive;
   }
   
   .progressBar {
@@ -113,18 +127,18 @@
     transition: width 0.4s ease-in-out; 
   }
   
-  .progressBar.progress {
-    background-color: #00ff00;
-  }
 
   .size{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     position: absolute;
-    margin-top: 500px; 
-    margin-right:250px; 
+    margin-top: 34%; 
+    margin-right:18%; 
     align-items: flex-start;
+    background-color: #afafaf;
+    border-radius: 30px;
+
   }
 
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -132,13 +146,22 @@
   .type {
     display: flex;
     position: absolute;
-    margin-top: 400px;
-    margin-right: 100px;
-    margin-left: 800px;
+    margin-top: 24%;
+    margin-right: 10%;
+    margin-left: 60%;
     height: 40px;
     text-align: center;
     font-family: 'Press Start 2P', cursive;
-    padding: 0 10px;
+    padding: 23px 40px;
+    background-color: #9dff89;
+    border-radius: 30px;
+  }
+  .typetxt{
+    text-align: center;
+    margin-bottom: 10px;
+    align-items: center;
+    flex-direction: column;
+
   }
 
   .button {
@@ -158,12 +181,15 @@
     margin-top:450px;
     margin-left:90px;
     border-radius: 50px; 
+    font-family: 'Press Start 2P', cursive;
+    justify-content: center;
   
   }
 
 .height {
   font-size: 16px;
   text-align: center;
+  font-family: 'Press Start 2P', cursive;
 }
 .weight {
   display: flex;
@@ -171,17 +197,7 @@
   flex-wrap: nowrap;
   font-size: 16px;
   text-align: left;
-  align-items: center
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
 }
-@import url('https://unpkg.com/css.gg@2.0.0/icons/css/move-down.css');
-@import url('https://unpkg.com/css.gg@2.0.0/icons/css/hashtag.css');
 
-.weight .gg-move-down {
-  width: 50px; 
-  height: 50px;
-  background-size: cover; 
-  position: absolute;
-  top: 600px; 
-  left: 950px; 
-  transform: translate(-50%, -50%); 
-}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './FilterBar.module.css';
+import PokemonType from '../Type/Type';
 
 const FilterBar = ({
   selectedType,
@@ -50,13 +51,13 @@ const FilterBar = ({
           Filter
         </button>
         {showCheckboxes && (
-          <div className={styles.typefilters}>
+          <div className={`${styles.typefilters} ${showCheckboxes ? '' : styles['slide-out-to-left']}`}>
             <div className={`${styles.filt} ${styles['slide-in-from-left']}`}>
               <div className={styles.buttonGrid}>
               {Types.map((type) => (
                 <label key={type}>
                   <button type="button" className={`types-button ${selectedType.includes(type) ? styles.selected : ''}`} onClick={() => onTypeChange(type)}  >
-                    {type}
+                    <PokemonType type={type} className={styles.Types}>{type}</PokemonType>
                   </button>
                 </label>
               ))}

@@ -23,13 +23,11 @@ const Detail = (props) => {
       </Link>
     </div>
   
-    <div className={style.pokename}>
+    <div className={`${style.pokename} ${style['slide-in-from-left']}`}>
     <h2 className={style.pokemonName}>{state.name}</h2>
     </div>
     <div className={style.id}>
-    <p className={style.p}>
-      <span className='gg-hashtag' ></span>{state.id}
-      </p>
+    <p className={style.p}>#{state.id}</p>
       </div>
 
     <div className={style.pack}>
@@ -63,11 +61,11 @@ const Detail = (props) => {
     
    
     <p className={style.weight}>
-        <span className="gg-move-down"></span>
         Weight: {state.weight}
       </p>
       </div>
     <div className={style.type}>
+      <div className={style.typetxt}>Types</div>
       {Array.isArray(state.type)
         ? state.type.map((pokemonType, index) => (
             <Type key={index} type={pokemonType} />
