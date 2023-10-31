@@ -159,10 +159,24 @@ const searchPokemonByNames = async (req, res) => {
   }
 };
 
+const deletePokemonByName = async (name) => {
+  try {
+    // Assuming you're using Sequelize, you can delete the Pokémon by its ID.
+    await Pokemon.destroy({
+      where: {
+        name: name,
+      },
+    });
+  } catch (error) {
+    throw new Error('Failed to delete the Pokémon');
+  }
+};
+
 
 module.exports = {
   getAllPokemons,
   getPokemonById,
   createPokemon,
   searchPokemonByNames,
+  deletePokemonByName
 };

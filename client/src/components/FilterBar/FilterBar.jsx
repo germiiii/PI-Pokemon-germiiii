@@ -56,8 +56,8 @@ const FilterBar = ({
               <div className={styles.buttonGrid}>
               {Types.map((type) => (
                 <label key={type}>
-                  <button type="button" className={`types-button ${selectedType.includes(type) ? styles.selected : ''}`} onClick={() => onTypeChange(type)}  >
-                    <PokemonType type={type} className={styles.Types}>{type}</PokemonType>
+                  <button type="button" className={`types-button ${selectedType.includes(type) ? styles.selected : styles[type]}`} onClick={() => onTypeChange(type)}  >
+                    {type}
                   </button>
                 </label>
               ))}

@@ -20,7 +20,7 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-    
+    margin-top: 4px;
     padding: 0 7px;
     }
   
@@ -29,7 +29,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .poison {
@@ -37,7 +38,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .ground {
@@ -45,7 +47,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .rock {
@@ -54,6 +57,7 @@
     border-radius: 33px;
     margin-left: 10px;
     padding: 0 7px;
+    margin-top: 4px;
   }
   
   .bug {
@@ -62,6 +66,7 @@
     border-radius: 33px;
     margin-left: 10px;
     padding: 0 7px;
+    margin-top: 4px;
   }
   
   .ghost {
@@ -69,7 +74,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .steel {
@@ -77,7 +83,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .fire {
@@ -86,6 +93,7 @@
     border-radius: 33px;
     margin-left: 10px;
     padding: 0 7px;
+    margin-top: 4px;
   }
   
   .water {
@@ -94,6 +102,7 @@
     border-radius: 33px;
     margin-left: 10px;
     padding: 0 7px;
+    margin-top: 4px;
   }
   
   .grass {
@@ -101,7 +110,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .electric {
@@ -109,7 +119,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .psychic {
@@ -117,7 +128,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .ice {
@@ -125,7 +137,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .dragon {
@@ -133,7 +146,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .dark {
@@ -141,7 +155,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .fairy {
@@ -149,7 +164,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .unknown {
@@ -157,7 +173,8 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }
   
   .shadow {
@@ -165,5 +182,6 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
-        padding: 0 7px;
+    padding: 0 7px;
+    margin-top: 4px;
   }

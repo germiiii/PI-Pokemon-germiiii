@@ -1,6 +1,6 @@
 @keyframes slideInFromLeft {
   0% {
-    transform: translateX(-25px);
+    transform: translateX(-15px);
     opacity: 2;
   }
   100% {
@@ -65,7 +65,6 @@
 .buttoncont {
   display: flex;
   align-items: center;
-
 }
 
 .origin {
@@ -86,6 +85,7 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   outline: none;
+  margin-left: 15px;
   transition: background-color 0.2s;
 }
 
@@ -96,8 +96,6 @@
 .sortButtons {
   display: flex;
   margin: 10px;
-  
-
 }
 .filt button {
   color: white;
@@ -110,23 +108,184 @@
   transition: background-color 0.1s;
   font-family: 'Courier New', monospace;
   width: auto;
-  height: auto;
+  height: 30px;
 }
 .selected {
-  background-color: #0080ff; 
+  background-color: #ff0000; 
   color: #fff;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transform: translateY(2px); 
+  transform: translateY(-5px); 
 }
 .buttonGrid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  grid-gap: 2px;
-  margin-left: 20px;
+  grid-gap: 0 0;
+
 }
 .Types{
   width: 100%;
   height: 100%;
+}
+.normal {
+  background-color: #A8A77A;
+  color: white;
+  border-radius: 33px;
+}
+
+.fighting {
+  background-color: #C22E28;
+  color: white;
+  border-radius: 33px;
+
+  }
+
+.flying {
+  background-color: #A98FF3;
+  color: white;
+  border-radius: 33px;
+
+}
+
+.poison {
+  background-color: #A33EA1;
+  color: white;
+  border-radius: 33px;
+
+}
+
+.ground {
+  background-color: #E2BF65;
+  color: white;
+  border-radius: 33px;
+
+}
+
+.rock {
+  background-color: #B6A136;
+  color: white;
+  border-radius: 33px;
+
+}
+
+.bug {
+  background-color: #A6B91A;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+}
+
+.ghost {
+  background-color: #735797;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.steel {
+  background-color: #B7B7CE;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.fire {
+  background-color: #EE8130;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+}
+
+.water {
+  background-color: #6390F0;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+}
+
+.grass {
+  background-color: #7AC74C;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.electric {
+  background-color: #F7D02C;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.psychic {
+  background-color: #F95587;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+}
+
+.ice {
+  background-color: #96D9D6;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.dragon {
+  background-color: #6F35FC;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.dark {
+  background-color: #705746;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.fairy {
+  background-color: #D685AD;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.unknown {
+  background-color: #B7B7CE;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
+
+}
+
+.shadow {
+  background-color: #292929;
+  color: white;
+  border-radius: 33px;
+  padding: 0 7px;
+  margin-top: 4px;
 }

@@ -1,4 +1,4 @@
-import { GET_POKEMONS, GET_POKEMON, GET_NEXT_BATCH , SEARCH_POKEMON, CLEAN_SEARCH, CREATE_POKEMON, SORT_POKEMONS} from './actions';
+import { GET_POKEMONS, GET_POKEMON, GET_NEXT_BATCH , SEARCH_POKEMON, CLEAN_SEARCH, CREATE_POKEMON, DELETE} from './actions';
 
 const initialState = {
   pokemons: [],
@@ -47,6 +47,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemons: [...state.pokemons, action.payload], 
       };
+      case DELETE:
+        const deletedPokemonName = action.payload;
+        const updatedPokemons = state.pokemons.filter(pokemon => pokemon.name !== deletedPokemonName);
+        return {
+          ...state,
+          pokemons: updatedPokemons,
+        };
+      
     default:
       return { ...state };
   };

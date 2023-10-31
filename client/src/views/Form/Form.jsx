@@ -1,8 +1,8 @@
 import { useState } from "react";
 import style from './Form.module.css'
-import axios from 'axios'
 import { useDispatch } from "react-redux";
 import { createPokemon } from "../../redux/actions";
+import PokemonType from "../../components/Type/Type";
 
 
 const Form = () => {
@@ -113,42 +113,42 @@ const Form = () => {
       <div>
         <label>Name</label>
         <input type="text" value={form.name} onChange={changeHandler} name="name" className={style.inputFields}/>
-        {errors.name && <span>{errors.name}</span>}
+        {errors.name && <span className={style.error}>{errors.name}</span>}
       </div>
       <div>
         <label>HP</label>
         <input type="number" min="1" step="1" value={form.hp} onChange={changeHandler} name="hp" className={style.inputFields}/>
-        {errors.hp && <span>{errors.hp}</span>}
+        {errors.hp && <span className={style.error}>{errors.hp}</span>}
       </div>
       <div>
         <label>ATK</label>
         <input type="number" min="1" step="1" value={form.attack} onChange={changeHandler} name="attack" className={style.inputFields}/>
-        {errors.attack && <span>{errors.attack}</span>}
+        {errors.attack && <span className={style.error}>{errors.attack}</span>}
       </div>
       <div>
         <label>DEF</label>
         <input type="number" min="1" step="1" value={form.defense} onChange={changeHandler} name="defense" className={style.inputFields}/>
-        {errors.defense && <span>{errors.defense}</span>}
+        {errors.defense && <span className={style.error}>{errors.defense}</span>}
       </div>
       <div>
         <label>SPD</label>
         <input type="number" min="1" step="1" value={form.speed} onChange={changeHandler} name="speed" className={style.inputFields}/>
-        {errors.speed && <span>{errors.speed}</span>}
+        {errors.speed && <span className={style.error}>{errors.speed}</span>}
       </div>
       <div>
         <label>Height</label>
         <input type="number" min="1" step="1" value={form.height} onChange={changeHandler} name="height" className={style.inputFields} />
-        {errors.height && <span>{errors.height}</span>}
+        {errors.height && <span className={style.error}>{errors.height}</span>}
       </div>
       <div>
         <label>Weight</label>
         <input type="number" min="1" step="1" value={form.weight} onChange={changeHandler} name="weight" className={style.inputFields}/>
-        {errors.weight && <span>{errors.weight}</span>}
+        {errors.weight && <span className={style.error}>{errors.weight}</span>}
       </div>
       <div>
         <label>Image URL</label>
         <input type="text" value={form.image} onChange={changeHandler} name="image" className={style.inputFields}/>
-        {errors.image && <span>{errors.image}</span>}
+        {errors.image && <span className={style.error}>{errors.image}</span>}
       </div>
       </div>
       <div>
@@ -160,13 +160,12 @@ const Form = () => {
       <button
         key={types}
         type="button" 
-        className={`types-button ${form.types.includes(types) ? style.selected : ''}`}
-        onClick={() => typeClickHandler(types)}
-      >
+        className={`${style[types]} ${form.types.includes(types) ? style.selected : ''}`}
+        onClick={() => typeClickHandler(types)}>
         {types}
       </button>
       ))}
-        {errors.types && <span>{errors.types}</span>}
+        {errors.types && <span className={style.error}>{errors.types}</span>}
       </div>
       </div>
       <div className={style.sendCont}>

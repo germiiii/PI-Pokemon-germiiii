@@ -116,7 +116,26 @@
     flex-direction: column;
     font-family: 'Press Start 2P', cursive;
   }
-  
+  .deleteButton{
+    background-color: #f50000;
+    border: none;
+    color: white;
+    padding: 0.5rem 0.75rem; 
+    text-align: center;
+    font-size: 16px; 
+    display: inline-block;
+    border-radius: 30px; 
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s;
+    position: relative;
+    margin-left: 520%;
+    margin-top: 25%;
+  }
+  .button:hover {
+    background-color: #FF5675;
+  }
   .progressBar {
     width: 0; 
     height: 10px;

@@ -3,11 +3,23 @@ import style from './Detail.module.css';
 import ProgressBar from '../../components/ProgressBar/ProgresBar';
 import Type from '../../components/Type/Type'
 import Button from '../../components/Button/Button'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { deletePokemon } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 
 const Detail = (props) => {
   const state = props.location.state; // Access the state from props
+
+const isDb = state.id === null
+
+const dispatch = useDispatch();
+const history = useHistory();
+
+const handleDelete = () => {
+  dispatch(deletePokemon(state.name))
+  history.push('/home')
+}
 
   if (!state) {
     // Handle the case when there's no state data (e.g., when directly accessing the route)
@@ -28,6 +40,11 @@ const Detail = (props) => {
     </div>
     <div className={style.id}>
     <p className={style.p}>#{state.id}</p>
+    {isDb && (
+          <button onClick={handleDelete} className={style.deleteButton}>
+            Delete
+          </button>
+        )}
       </div>
 
     <div className={style.pack}>

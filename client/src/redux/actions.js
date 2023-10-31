@@ -6,6 +6,7 @@ export const GET_NEXT_BATCH = 'GET_NEXT_BATCH';
 export const SEARCH_POKEMON = 'SEARCH_POKEMON';
 export const CLEAN_SEARCH = 'CLEAN_SEARCH'
 export const CREATE_POKEMON = 'CREATE_POKEMON'
+export const DELETE = 'DELETE'
 
 
 
@@ -64,7 +65,18 @@ export const createPokemon = (formData) => {
       dispatch({ type: CREATE_POKEMON, payload: resp.data });
       alert('pokemon created succesfully',resp.data)
     } catch (error) {
-      console.log("Error creating the Pokémon: " + error);
+      alert("Error creating the Pokémon: " + error.message);
+    }
+  };
+};
+export const deletePokemon = (name) => {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`http://localhost:3001/pokemon/${name}`);
+      dispatch({ type: DELETE, payload: name });
+      alert('Pokemon deleted successfully', name);
+    } catch (error) {
+      alert("Error deleting the Pokémon: " + error.message);
     }
   };
 };
