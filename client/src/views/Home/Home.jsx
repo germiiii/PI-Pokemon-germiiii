@@ -22,15 +22,19 @@ const Home = () => {
 // Pagination  
   const [currentPage, setCurrentPage] = useState(1);
   const [offset, setOffset] = useState(0); 
-
+  const [totalPages, setTotalPages] = useState(Math.ceil(pokemons.length / itemsPerPage));
   useEffect(() => {
     dispatch(getPokemons()).then(() => {
       // When data is ready, set loading to false
       setLoading(false);
     });
   }, []);
-  // console.log(pokemons)
-  const totalPages = Math.ceil(pokemons.length / itemsPerPage) + 1;
+
+  useEffect(() => {
+    //calculamos las paginas totales basados en el filtrado o la busqeda
+    const filteredPokemons = displayPokemons(pokemons, selectedType, selectedOrigin);
+    setTotalPages(Math.ceil(filteredPokemons.length / itemsPerPage));
+  },[pokemons, selectedType, selectedOrigin])
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -47,11 +51,13 @@ const Home = () => {
       // Fetch the next batch of Pokémon
       dispatch(getNextBatch(offset + offsetIncrement, limit));
     }
+    if (startIndex >= sortedResult.length) {
+      setCurrentPage(1);
+    }
   };
 
   const displayPokemons = (pokemons, selectedTypes, selectedOrigin) => {
     return pokemons.filter((pokemon) => {
-      //console.log('pokemon.types',pokemon.types)
       const typeFilters = selectedTypes.length === 0 || selectedTypes.every((type) => pokemon.types.includes(type));
      
       const originFilter = selectedOrigin === 'All' || (selectedOrigin === 'API' && Number.isInteger(pokemon.id) || (selectedOrigin === 'Database' && !Number.isInteger(pokemon.id))); 
@@ -81,19 +87,13 @@ const Home = () => {
       return pokemons; // No sorting
     }
   };
-
-  //console.log('function',displayPokemons(pokemons,selectedType))
-  //console.log('pokemonbytype',pokemonsByType	)
   
   const result = (searchResults && searchResults.length > 0) ? searchResults :displayPokemons(pokemons, selectedType, selectedOrigin);
 
   const sortedResult = sortPokemons(result)
 
-  // Calculate the slice range based on the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-
- //console.log('result',result)
 
  return (
   <div>
