@@ -36,7 +36,8 @@ export const getNextBatch = (offset, limit) => {
   return async function (dispatch) {
     try {
       const apiData = await axios.get(`http://localhost:3001/pokemon?offset=${offset}&limit=${limit}`);
-      dispatch({ type: GET_NEXT_BATCH, payload: apiData.data });
+      const filteredData = apiData.data.filter(pokemon => !isNaN(pokemon.id)) //sacamos los pokemons de la DB
+      dispatch({ type: GET_NEXT_BATCH, payload: filteredData });
     } catch (error) {
       console.error("Error fetching the next batch of Pokémon:", error);
     }

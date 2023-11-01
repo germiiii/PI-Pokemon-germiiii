@@ -8,7 +8,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, maxButtonsToShow = 
 
   const pageButtons = [];
 
-  // Create buttons for each page in the range
+  // creamos un boton para cada pagina
   for (let page = startPage; page <= endPage; page++) {
     pageButtons.push(
       <button
