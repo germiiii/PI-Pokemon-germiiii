@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import styles from './NavBar.module.css';
-import { Link, useHistory } from 'react-router-dom'; // Import useHistory
-import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
 import { searchPokemon, getPokemon, cleanSearchResults } from '../../redux/actions';
 
 const NavBar = () => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
-  const searchResults = useSelector((state) => state.searchResults);
   const isSearchDisabled = search.trim() === '';
-  const history = useHistory(); // Get the history object
+  const history = useHistory(); 
 
+  //chequeamos si la busqueda es por id o por nombre
   const handleSearch = (search) => {
-    console.log(search);
-    if (typeof search === 'string' && search.trim() !== '') {
-      dispatch(searchPokemon(search));
-      // Programmatically navigate to the home view with search results
-      history.push('/home');
-    } else if (typeof search === 'number') {
+    if (!isNaN(search)) {
+      // si la buqueda es un numero despacha la action getPokemon
       dispatch(getPokemon(search));
+    } else if (typeof search === 'string') {
+      //si la busqueda es un string despacha la action searchPokemon
+      dispatch(searchPokemon(search));
+      history.push('/home');
     }
-    console.log(searchResults);
-    console.log(dispatch(getPokemon(search)));
   };
 
-  // Automatically clear search results when search bar is empty
+  // Automaticamente mostramos todos los pokemons al vaciar la serachbar
   useEffect(() => {
     if (search.trim() === '') {
       dispatch(cleanSearchResults());
@@ -44,13 +42,12 @@ const NavBar = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <button
-              onClick={() => handleSearch(search)}
-              className={styles.button}
-              disabled={isSearchDisabled}
-            >
+            <button onClick={() => handleSearch(search)} className={styles.button} disabled={isSearchDisabled}>
               Search
             </button>
+            <Link to='/about'>
+            <button className={styles.button}>About</button>
+            </Link>
           </div>
           <div className={styles.buttoncontainer}>
             <Link to="/home">

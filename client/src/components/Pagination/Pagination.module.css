@@ -11,7 +11,7 @@
     padding: 0.5rem 1rem;
     margin-right: 0.5rem;
     cursor: pointer;
-    border-radius: 0.25rem;
+    border-radius: 30px;
   }
   
   .paginationbutton:hover {

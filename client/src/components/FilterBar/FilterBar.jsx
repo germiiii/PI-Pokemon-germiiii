@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from './FilterBar.module.css';
-import PokemonType from '../Type/Type';
 
 const FilterBar = ({
   selectedType,
@@ -11,7 +10,7 @@ const FilterBar = ({
   setSortOrder,
   sortOrder,
 }) => {
-  const [showCheckboxes, setShowCheckboxes] = useState(false);
+  const [showTypeButtons, setShowTypeButtons] = useState(false);
 
   const onTypeChange = (type) => {
     if (selectedType.includes(type)) {
@@ -47,11 +46,11 @@ const FilterBar = ({
   return (
     <div className={styles.pokedexfilter}>
       <div className={styles.buttoncont}>
-        <button className={styles.button} onClick={() => setShowCheckboxes(!showCheckboxes)}>
+        <button className={styles.button} onClick={() => setShowTypeButtons(!showTypeButtons)}>
           Filter
         </button>
-        {showCheckboxes && (
-          <div className={`${styles.typefilters} ${showCheckboxes ? '' : styles['slide-out-to-left']}`}>
+        {showTypeButtons && (
+          <div className={`${styles.typefilters} ${showTypeButtons ? '' : styles['slide-out-to-left']}`}>
             <div className={`${styles.filt} ${styles['slide-in-from-left']}`}>
               <div className={styles.buttonGrid}>
               {Types.map((type) => (

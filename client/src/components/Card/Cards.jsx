@@ -10,7 +10,7 @@ const Cards = (props) => {
       <div className={style.card}>
         <div className={style.cont}>
         <p className={style.pokemonName}>{name}</p>
-        {id && <p className={style.p}>id: {id}</p>}
+        {id && <p className={style.p}>#{id}</p>}
         </div>
         <div className={style.imgcont}>
         <Link to={{

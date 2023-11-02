@@ -6,8 +6,7 @@ import validate from '../../utils/validation'
 
 const Form = () => {
   
-  
-  
+  const [imgPreview, setImagePreview] = useState(null);
   const [form, setForm] = useState({
     name: "",
     hp: '',
@@ -36,6 +35,9 @@ const Form = () => {
     const property = event.target.name;
     const value = event.target.value;
     
+    if(property === 'image') {
+      setImagePreview(value)
+    }
     // Update the form
     setForm({ ...form, [property]: value });
 
@@ -61,8 +63,12 @@ const Form = () => {
       types: newTypes,
     }));
   };
+
   const dispatch = useDispatch();
   
+  const isVisible = (errors, form) => {
+    return Object.values(errors).every((error) => !error) && Object.values(form).every((form) => form) && form.types.length !== 0;
+  }
   //console.log(form)
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -111,6 +117,11 @@ const Form = () => {
         <label>Image URL</label>
         <input type="text" value={form.image} onChange={changeHandler} name="image" className={style.inputFields}/>
         {errors.image && <span className={style.error}>{errors.image}</span>}
+        { imgPreview && (<div className={style.imgP}>
+          <label>Img Preview</label>
+          <img src={imgPreview} alt='Image Preview' className={style.img} />
+        </div>
+        )}
       </div>
       </div>
       <div>
@@ -130,7 +141,7 @@ const Form = () => {
         {errors.types && <span className={style.error}>{errors.types}</span>}
       </div>
       </div>
-      {Object.values(errors).every((error) => !error) && form.types.length != 0 && (
+      {isVisible(errors, form) && (
       <div className={style.sendCont}>
       <button className={style.send} onClick={submitHandler}>Crear</button>
       </div>   

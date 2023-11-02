@@ -66,7 +66,7 @@ export const createPokemon = (formData) => {
       dispatch({ type: CREATE_POKEMON, payload: resp.data });
       alert('pokemon created succesfully',resp.data)
     } catch (error) {
-      alert("Error creating the Pokémon: " + error.message);
+      alert("Error creating the Pokémon: "+ error.message);
     }
   };
 };

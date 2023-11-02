@@ -13,6 +13,20 @@
   padding:78px;
 
 }
+.img {
+  max-width: 96px;
+  max-height: 96px;
+  border-radius: 50%;
+}
+.imgP {
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #707070;
+}
 .form label {
   font-weight: bold;
   background-color: #c9c9c9;
@@ -56,7 +70,8 @@
 
 .form button {
   color: white;
-  border: none;
+  border: 0.5px 0.5px;
+  border-color:#888888;
   border-radius: 30px;
   font-weight: bold;
   cursor: pointer;

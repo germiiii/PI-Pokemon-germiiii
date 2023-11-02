@@ -89,6 +89,7 @@
   transition: background-color 0.2s;
 }
 
+
 .button:hover, .sortButton:hover {
   background-color: #FF5675;
 }
@@ -99,8 +100,9 @@
 }
 .filt button {
   color: white;
+  border-color: #c2c2c2;
   padding: 0.6px 1px;
-  border: none;
+  border: 0.6px 0.6px;
   border-radius: 0.5rem;
   font-weight: bold;
   margin-right: 3px;
@@ -115,7 +117,7 @@
   color: #fff;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px); 
+  transform: translateY(-2px); 
 }
 .buttonGrid {
   display: grid;

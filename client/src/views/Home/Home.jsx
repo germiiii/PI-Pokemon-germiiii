@@ -25,30 +25,38 @@ const Home = () => {
   const [totalPages, setTotalPages] = useState(Math.ceil(pokemons.length / itemsPerPage));
   useEffect(() => {
     dispatch(getPokemons()).then(() => {
-      // When data is ready, set loading to false
+      // una vez que los datos estan listos quitamos el loading
       setLoading(false);
     });
   }, []);
 
+  //calculamos las paginas totales basados en el filtrado o la busqeda
   useEffect(() => {
-    //calculamos las paginas totales basados en el filtrado o la busqeda
     const filteredPokemons = displayPokemons(pokemons, selectedType, selectedOrigin);
     setTotalPages(Math.ceil(filteredPokemons.length / itemsPerPage));
   },[pokemons, selectedType, selectedOrigin])
 
+  const displayPokemons = (pokemons, selectedTypes, selectedOrigin) => {
+    return pokemons.filter((pokemon) => {
+      const typeFilters = selectedTypes.length === 0 || selectedTypes.every((type) => pokemon.types.includes(type));
+     // diferenciamos los pokemons de la api id = integer con los de la DB id=UUID (NaN)
+      const originFilter = selectedOrigin === 'All' || (selectedOrigin === 'API' && Number.isInteger(pokemon.id) || (selectedOrigin === 'Database' && !Number.isInteger(pokemon.id))); 
+      return typeFilters && originFilter;
+    });
+  };
   const handlePageChange = (page) => {
     setCurrentPage(page);
 
-    // Calculate the slice range based on the current page
+    // calculamos el rango del slice basados en la pagina actual 
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    // Check if you're at the end of the current batch
+    // chequeamos si estamos en el final del array inicial de pokemons
     if (endIndex > pokemons.length) {
-      // Update the offset for the next batch
+      // actualizamos el offset para el proximo batch de pokemons
       setOffset(offset + offsetIncrement);
       const limit = offsetIncrement * 2;
-      // Fetch the next batch of Pokémon
+      // pedimos el nuevo batch de pokemones
       dispatch(getNextBatch(offset + offsetIncrement, limit));
     }
     if (startIndex >= sortedResult.length) {
@@ -56,17 +64,9 @@ const Home = () => {
     }
   };
 
-  const displayPokemons = (pokemons, selectedTypes, selectedOrigin) => {
-    return pokemons.filter((pokemon) => {
-      const typeFilters = selectedTypes.length === 0 || selectedTypes.every((type) => pokemon.types.includes(type));
-     
-      const originFilter = selectedOrigin === 'All' || (selectedOrigin === 'API' && Number.isInteger(pokemon.id) || (selectedOrigin === 'Database' && !Number.isInteger(pokemon.id))); 
-      return typeFilters && originFilter;
-    });
-  };
   
   const sortPokemons = (pokemons) => {
-    // Sort the pokemons based on the selected sorting criteria
+    // ordenamos los pokemons en base a lo seleccionado 
     if (sortType === 'name') {
       return pokemons.sort((a, b) => {
         if (sortOrder === 'asc') {
@@ -87,13 +87,12 @@ const Home = () => {
       return pokemons; // No sorting
     }
   };
-  
+  //chequeamos si tenemos resultados de busqueda, sino mostramos los pokemons
   const result = (searchResults && searchResults.length > 0) ? searchResults :displayPokemons(pokemons, selectedType, selectedOrigin);
-
   const sortedResult = sortPokemons(result)
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const endIndex = startIndex + itemsPerPage ;
 
  return (
   <div>
@@ -108,9 +107,7 @@ const Home = () => {
         sortOrder={sortOrder}
       />
     </div>
-    {loading ? (
-      <div className={styles.loading}></div>
-    ) : (
+    {loading ? ( <div className={styles.loading}></div> ) : (
       <div>
         <CardsContainer pokemons={sortedResult.slice(startIndex, endIndex)} />
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />

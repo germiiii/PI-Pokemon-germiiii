@@ -13,6 +13,9 @@
     color: white;
     border-radius: 33px;
     margin-left: 10px;
+    margin-top: 4px;
+    padding: 0 7px;
+    border: 1px solid #ffffff;
   }
   
   .fighting {
@@ -22,6 +25,7 @@
     margin-left: 10px;
     margin-top: 4px;
     padding: 0 7px;
+    border: 1px solid #ffffff;
     }
   
   .flying {
@@ -31,6 +35,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .poison {
@@ -40,6 +45,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .ground {
@@ -49,6 +55,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .rock {
@@ -58,6 +65,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .bug {
@@ -67,6 +75,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .ghost {
@@ -76,6 +85,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .steel {
@@ -85,6 +95,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .fire {
@@ -94,6 +105,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .water {
@@ -103,6 +115,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .grass {
@@ -112,6 +125,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .electric {
@@ -121,6 +135,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .psychic {
@@ -130,6 +145,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .ice {
@@ -139,6 +155,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .dragon {
@@ -148,6 +165,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .dark {
@@ -157,6 +175,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .fairy {
@@ -166,6 +185,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .unknown {
@@ -175,6 +195,7 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
   
   .shadow {
@@ -184,4 +205,5 @@
     margin-left: 10px;
     padding: 0 7px;
     margin-top: 4px;
+    border: 1px solid #ffffff;
   }
